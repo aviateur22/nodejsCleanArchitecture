@@ -1,5 +1,10 @@
+import { TodoEntity } from "../../domain/entities/todo/TodoEntity";
 import { UseCaseServiceImpl } from "../../domain/services/UseCaseServiceImpl";
 import { TodoGenerator } from "./utilities/TodoGenerator";
+
+
+// Instance GetAllTodoUseCase
+const getAllToDoUseCase = UseCaseServiceImpl.getUseCases().getAllTodoUseCase;
 
 describe('UseCase: getAllTodos', () => {
 
@@ -12,12 +17,32 @@ describe('UseCase: getAllTodos', () => {
     await TodoGenerator.CreateTodos();    
   });
 
-  it('Should get all todos', async() => {
-    const getAllToDoUseCase = UseCaseServiceImpl.getUseCases().getAllTodoUseCase;
-    const todos = await getAllToDoUseCase.execute();
+  it('Should find 2 todos', async() => {
+    try {
+      
+      // Recupération des Todos
+      const todos = await getAllToDoUseCase.execute();
 
-    expect(todos.length).toBe(2);
-
+      expect(todos.length).toBe(2);
+      expect(todos[0]).toBeInstanceOf(TodoEntity);
+    }
+    catch(error) {
+      expect(error).toBeFalsy();
+    }
   });
+
+  it('Should find no todo', async() => {
+    try {     
+      // Clear tous les todos
+      await TodoGenerator.ClearAllTodos();
+
+      // Recupération des Todos
+      const todos = await getAllToDoUseCase.execute();
+
+      expect(todos.length).toBe(0);
+    } catch (error) {
+      expect(error).toBeFalsy();
+    }
+  })
 
 });

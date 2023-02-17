@@ -6,7 +6,7 @@ import { TodoModel } from "../../models/TodoModel";
  */
 class PostgreSQLToDoRepository implements TodoRepositorySchema {
   
-  save(toDo: AddTodoSchema): TodoModel {
+  async save(toDo: AddTodoSchema): Promise<TodoModel> {
     throw new Error("Method not implemented.");
   }
   update(toDo: UpdateTodoSchema): TodoModel {
@@ -24,7 +24,7 @@ class PostgreSQLToDoRepository implements TodoRepositorySchema {
   deleteOne(Todo: DeleteTodoSchema): TodoModel {
     throw new Error("Method not implemented.");
   }
-  deleteAll(): boolean {
+  async deleteAll(): Promise<boolean> {
     throw new Error("Method not implemented.");
   }
   

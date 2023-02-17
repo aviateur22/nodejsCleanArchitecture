@@ -1,5 +1,6 @@
 import { RepositoryServiceImpl } from "../../infra/services/repository/RepositoryServiceImpl";
-import { TodoEntity } from "../entities/items/TodoEntity";
+import { TodoEntityMapper } from "../dtos/TodoMapper";
+import { TodoEntity } from "../entities/todo/TodoEntity";
 
 /**
  * Récupération de tous les Todos
@@ -12,7 +13,9 @@ class GetAllTodoUseCase {
    * @returns {Array<TodoEntity>}
    */
   async execute(): Promise<Array<TodoEntity>> {
-    return this.repositories.getAll();
+
+    const todoModels = await this.repositories.getAll();
+    return TodoEntityMapper.getTodoEntities(todoModels);
   }
 }
 

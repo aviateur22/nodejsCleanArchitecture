@@ -9,7 +9,7 @@ interface TodoRepositorySchema {
    * 
    * @param {AddItemSchema} Todo 
    */
-  save(Todo: AddTodoSchema): TodoModel;
+  save(Todo: AddTodoSchema): Promise<TodoModel>;
 
   /**
    * Mise a jour des données d'un item
@@ -43,7 +43,7 @@ interface TodoRepositorySchema {
   /**
    * Suppression de tous les todos
    */
-  deleteAll(): boolean
+  deleteAll(): Promise<boolean>
 
 
 

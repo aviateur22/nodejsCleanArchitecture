@@ -13,7 +13,7 @@ class InMemoryToDoRepository implements TodoRepositorySchema {
    * @param todo 
    * @returns 
    */
-  save(todo: AddTodoSchema): TodoModel {
+  async save(todo: AddTodoSchema): Promise<TodoModel> {
     // Index
     const index: number = this.todos.length === 0 ? 1 : Math.max(...this.todos.map(x=>x.id)) + 1;
 
@@ -53,7 +53,7 @@ class InMemoryToDoRepository implements TodoRepositorySchema {
   /**
    * Suppression des Todos
    */
-  deleteAll(): boolean {
+  async deleteAll(): Promise<boolean> {
     this.todos = [];
     return true;
   }  
