@@ -1,4 +1,4 @@
-import { ToDoRepositorySchema } from "../../../domain/ports/repositoriesSchemas/ToDoRepositorySchema";
+import { TodoRepositorySchema } from "../../../domain/ports/repositoriesSchemas/TodoRepositorySchema";
 import { InMemoryToDoRepository } from "../../repositories/inMemoryRepository/InMemoryToDoRepository";
 import { PostgreSQLToDoRepository } from "../../repositories/postgreSQL/PostgreSQLToDoRepository";
 import { Repositories } from "./Repositories";
@@ -30,7 +30,7 @@ class RepositoriesSelection {
    * @returns { Repositories }
    */
   private sourceInMemory(): Repositories {
-    const inMemoryToDoRepository: ToDoRepositorySchema = new InMemoryToDoRepository();
+    const inMemoryToDoRepository: TodoRepositorySchema = new InMemoryToDoRepository();
     return new Repositories(inMemoryToDoRepository);
   }
 
@@ -39,7 +39,7 @@ class RepositoriesSelection {
    * @returns { Repositories }
    */
   private sourcePostgreSQL(): Repositories {
-    const postgreSQLItemRepository: ToDoRepositorySchema = new PostgreSQLToDoRepository();
+    const postgreSQLItemRepository: TodoRepositorySchema = new PostgreSQLToDoRepository();
     return new Repositories(postgreSQLItemRepository);
   }
 }

@@ -1,7 +1,7 @@
 /**
  * Model Item isuue de la base de données 
  */
-class ToDoModel {
+class TodoModel {
 
   public readonly id: number;
   public readonly title: string;
@@ -28,4 +28,4 @@ class ToDoModel {
   
 }
 
-export { ToDoModel }
+export { TodoModel }

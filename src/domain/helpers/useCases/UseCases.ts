@@ -1,26 +1,26 @@
-import { AddToDoUseCase } from "../../useCases/AddToDoUseCase"
-import { CheckToDoUseCase } from "../../useCases/CheckToDoUseCase";
-import { GetAllToDoUseCase } from "../../useCases/GetAllToDoUseCase";
-import { GetOneToDoUseCase } from "../../useCases/GetOneToDoUseCase";
-import { UpdateToDoUseCase } from "../../useCases/UpdateToDoUseCase";
+import { AddTodoUseCase } from "../../useCases/AddTodoUseCase"
+import { CheckTodoUseCase } from "../../useCases/CheckTodoUseCase";
+import { GetAllTodoUseCase } from "../../useCases/GetAllTodoUseCase";
+import { GetOneTodoUseCase } from "../../useCases/GetOneTodoUseCase";
+import { UpdateTodoUseCase } from "../../useCases/UpdateTodoUseCase";
 
 /**
  * UseCases disponibles dans le domaine
  */
 class UseCases {
 
-  protected readonly addToDoUseCase: AddToDoUseCase;
-  protected readonly checkToDoUseCase: CheckToDoUseCase;
-  protected readonly updateToDoUseCase: UpdateToDoUseCase;
-  protected readonly getAllToDoUseCase: GetAllToDoUseCase;
-  protected readonly getOneToDoUseCase: GetOneToDoUseCase;
+  readonly addTodoUseCase: AddTodoUseCase;
+  readonly checkTodoUseCase: CheckTodoUseCase;
+  readonly updateTodoUseCase: UpdateTodoUseCase;
+  readonly getAllTodoUseCase: GetAllTodoUseCase;
+  readonly getOneTodoUseCase: GetOneTodoUseCase;
 
   constructor() {
-    this.addToDoUseCase = new AddToDoUseCase();
-    this.checkToDoUseCase = new CheckToDoUseCase();
-    this.updateToDoUseCase = new UpdateToDoUseCase();
-    this.getOneToDoUseCase = new GetOneToDoUseCase();
-    this.getAllToDoUseCase = new GetAllToDoUseCase();
+    this.addTodoUseCase = new AddTodoUseCase();
+    this.checkTodoUseCase = new CheckTodoUseCase();
+    this.updateTodoUseCase = new UpdateTodoUseCase();
+    this.getOneTodoUseCase = new GetOneTodoUseCase();
+    this.getAllTodoUseCase = new GetAllTodoUseCase();
   }
 
 }

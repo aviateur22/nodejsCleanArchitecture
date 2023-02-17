@@ -1,7 +1,7 @@
 /**
  * Suppression d'une ToDo
  */
-class DeleteToDoUseCase {
+class DeleteTodoUseCase {
 
 }
-export { DeleteToDoUseCase }
+export { DeleteTodoUseCase }

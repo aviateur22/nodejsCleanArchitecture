@@ -1,23 +1,30 @@
-import { ToDoRepositorySchema } from "../../../domain/ports/repositoriesSchemas/ToDoRepositorySchema";
-import { ToDoModel } from "../../models/ToDoModel";
+import { TodoRepositorySchema } from "../../../domain/ports/repositoriesSchemas/TodoRepositorySchema";
+import { TodoModel } from "../../models/TodoModel";
 
 /**
  * Base de données PostgreSQL
  */
-class PostgreSQLToDoRepository implements ToDoRepositorySchema {
-  save(toDo: AddTodoSchema): ToDoModel {
+class PostgreSQLToDoRepository implements TodoRepositorySchema {
+  
+  save(toDo: AddTodoSchema): TodoModel {
     throw new Error("Method not implemented.");
   }
-  update(toDo: UpdateTodoSchema): ToDoModel {
+  update(toDo: UpdateTodoSchema): TodoModel {
     throw new Error("Method not implemented.");
   }
-  checkToggleItem(toDo: CheckToggleTodoSchema): ToDoModel {
+  checkToggleItem(toDo: CheckToggleTodoSchema): TodoModel {
     throw new Error("Method not implemented.");
   }
-  async getAll(): Promise<Array<ToDoModel>> {
+  async getAll(): Promise<Array<TodoModel>> {
     throw new Error("Method not implemented.");
   }
-  getOne(toDo: GetOneTodoSchema): ToDoModel {
+  getOne(toDo: GetOneTodoSchema): TodoModel {
+    throw new Error("Method not implemented.");
+  }
+  deleteOne(Todo: DeleteTodoSchema): TodoModel {
+    throw new Error("Method not implemented.");
+  }
+  deleteAll(): boolean {
     throw new Error("Method not implemented.");
   }
   

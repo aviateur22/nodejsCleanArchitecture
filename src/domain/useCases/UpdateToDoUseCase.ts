@@ -1,8 +1,8 @@
 /**
  * Mise a jour du contenue d'une Todo
  */
-class UpdateToDoUseCase {
+class UpdateTodoUseCase {
 
 }
 
-export { UpdateToDoUseCase }
+export { UpdateTodoUseCase }

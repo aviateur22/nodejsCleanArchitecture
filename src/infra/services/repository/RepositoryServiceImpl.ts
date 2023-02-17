@@ -6,13 +6,17 @@ import { RepositorySources } from "../../helpers/repositories/RepositorySources"
  * Implementation de la base de données
  */
 class RepositoryServiceImpl {
-  static repositories: Repositories;
+  
+  /**
+   * Repositories actif pour le projet
+   */
+  private static repositories: Repositories;
 
   /**
    * Renvoies la base de données selectionnée
    * @returns { Repositories }
    */
-  getRepositories(): Repositories {
+  static getRepositories(): Repositories {
 
     if(!RepositoryServiceImpl.repositories) {
       const repositoriesSelection = new RepositoriesSelection();

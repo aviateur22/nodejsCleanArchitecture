@@ -1,8 +1,8 @@
 /**
  * Usecase CheckToDoUseCase
  */
-class CheckToDoUseCase {
+class CheckTodoUseCase {
 
 }
 
-export { CheckToDoUseCase }
+export { CheckTodoUseCase }
