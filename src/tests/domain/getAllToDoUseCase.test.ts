@@ -2,11 +2,9 @@ import { TodoEntity } from "../../domain/entities/todo/TodoEntity";
 import { UseCaseServiceImpl } from "../../domain/services/UseCaseServiceImpl";
 import { TodoGenerator } from "./utilities/TodoGenerator";
 
-
-// Instance GetAllTodoUseCase
-const getAllToDoUseCase = UseCaseServiceImpl.getUseCases().getAllTodoUseCase;
-
 describe('UseCase: getAllTodos', () => {
+  // Instance GetAllTodoUseCase
+  const getAllToDoUseCase = UseCaseServiceImpl.getUseCases().getAllTodoUseCase;
 
   // Reset de la base de données
   beforeEach(async()=>{
