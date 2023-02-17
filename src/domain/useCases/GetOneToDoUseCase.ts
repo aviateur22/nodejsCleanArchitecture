@@ -1,7 +1,7 @@
 /**
  * Récupération d'une ToDo
  */
-class GetOneToDoUseCase {
+class GetOneTodoUseCase {
 
 }
-export { GetOneToDoUseCase }
+export { GetOneTodoUseCase }

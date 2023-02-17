@@ -1,39 +1,52 @@
-import { ToDoModel } from "../../../infra/models/ToDoModel";
+import { TodoModel } from "../../../infra/models/TodoModel";
 
 /**
  * Schema base de données Item
  */
-interface ToDoRepositorySchema {
+interface TodoRepositorySchema {
 
   /**
    * 
-   * @param {AddItemSchema} toDo 
+   * @param {AddItemSchema} Todo 
    */
-  save(toDo: AddTodoSchema): ToDoModel;
+  save(Todo: AddTodoSchema): Promise<TodoModel>;
 
   /**
    * Mise a jour des données d'un item
-   * @param {UpdateTodoSchema} toDo 
+   * @param {UpdateTodoSchema} Todo 
    */
-  update(toDo: UpdateTodoSchema): ToDoModel;
+  update(Todo: UpdateTodoSchema): TodoModel;
 
   /**
    * Check ou unCheck un item
-   * @param {CheckItemSchema} toDo 
+   * @param {CheckItemSchema} Todo 
    */
-  checkToggleItem(toDo: CheckToggleTodoSchema): ToDoModel;
+  checkToggleItem(Todo: CheckToggleTodoSchema): TodoModel;
 
   /**
    * Récupération de tous les items
    */
-  getAll(): Promise<Array<ToDoModel>>
+  getAll(): Promise<Array<TodoModel>>
 
   /**
    * Récuperation de 1 item
-   * @param {GetOneTodoSchema} toDo 
+   * @param {GetOneTodoSchema} Todo 
    */
-  getOne(toDo: GetOneTodoSchema): ToDoModel;
+  getOne(Todo: GetOneTodoSchema): TodoModel;
+
+  /**
+   * Suppression de 1 item
+   * @param Todo 
+   */
+  deleteOne(Todo: DeleteTodoSchema): TodoModel;
+
+  /**
+   * Suppression de tous les todos
+   */
+  deleteAll(): Promise<boolean>
+
+
 
 }
 
-export { ToDoRepositorySchema }
+export { TodoRepositorySchema }

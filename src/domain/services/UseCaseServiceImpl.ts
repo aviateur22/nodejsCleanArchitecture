@@ -4,7 +4,11 @@ import { UseCases } from "../helpers/useCases/UseCases";
  * Implemantation des UseCases
  */
 class UseCaseServiceImpl {
-  static useCases: UseCases;
+
+  /**
+   * Instance des useCase du projet
+   */
+  private static useCases: UseCases;
 
   /**
    * Récupération des UsesCases 

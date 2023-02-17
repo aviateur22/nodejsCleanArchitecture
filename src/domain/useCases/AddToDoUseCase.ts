@@ -1,8 +1,8 @@
 /**
  * Ajout d'un nouveau ToDo
  */
-class AddToDoUseCase {
+class AddTodoUseCase {
 
 }
 
-export { AddToDoUseCase }
+export { AddTodoUseCase }
