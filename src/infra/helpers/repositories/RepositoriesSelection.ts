@@ -1,4 +1,4 @@
-import { ToDoRepositorySchema } from "../../../domains/ports/repositoriesSchemas/ToDoRepositorySchema";
+import { ToDoRepositorySchema } from "../../../domain/ports/repositoriesSchemas/ToDoRepositorySchema";
 import { InMemoryToDoRepository } from "../../repositories/inMemoryRepository/InMemoryToDoRepository";
 import { PostgreSQLToDoRepository } from "../../repositories/postgreSQL/PostgreSQLToDoRepository";
 import { Repositories } from "./Repositories";

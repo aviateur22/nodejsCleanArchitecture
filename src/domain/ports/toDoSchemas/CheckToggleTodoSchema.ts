@@ -1,7 +1,7 @@
 /**
  * Schema pour mettre a jour un item
  */
-interface CheckTodoSchema {
+interface CheckToggleTodoSchema {
   id: number,
   statut: boolean;
 }

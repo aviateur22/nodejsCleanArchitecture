@@ -1,4 +1,4 @@
-import { ToDoRepositorySchema } from "../../../domains/ports/repositoriesSchemas/ToDoRepositorySchema"
+import { ToDoRepositorySchema } from "../../../domain/ports/repositoriesSchemas/ToDoRepositorySchema"
 
 /**
  * Regroupement des repositories

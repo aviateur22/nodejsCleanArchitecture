@@ -1,4 +1,4 @@
-import { ToDoRepositorySchema } from "../../../domains/ports/repositoriesSchemas/ToDoRepositorySchema";
+import { ToDoRepositorySchema } from "../../../domain/ports/repositoriesSchemas/ToDoRepositorySchema";
 import { ToDoModel } from "../../models/ToDoModel";
 
 /**
@@ -11,10 +11,10 @@ class InMemoryToDoRepository implements ToDoRepositorySchema {
   update(toDo: UpdateTodoSchema): ToDoModel {
     throw new Error("Method not implemented.");
   }
-  checkToggleItem(toDo: CheckTodoSchema): ToDoModel {
+  checkToggleItem(toDo: CheckToggleTodoSchema): ToDoModel {
     throw new Error("Method not implemented.");
   }
-  getAll(): ToDoModel[] {
+  async getAll(): Promise<Array<ToDoModel>> {
     throw new Error("Method not implemented.");
   }
   getOne(toDo: GetOneTodoSchema): ToDoModel {

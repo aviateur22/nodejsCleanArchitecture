@@ -5,7 +5,7 @@ import { GetOneToDoUseCase } from "../../useCases/GetOneToDoUseCase";
 import { UpdateToDoUseCase } from "../../useCases/UpdateToDoUseCase";
 
 /**
- * UseCases de disponible dans le domaine
+ * UseCases disponibles dans le domaine
  */
 class UseCases {
 

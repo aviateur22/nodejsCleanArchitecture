@@ -21,12 +21,12 @@ interface ToDoRepositorySchema {
    * Check ou unCheck un item
    * @param {CheckItemSchema} toDo 
    */
-  checkToggleItem(toDo: CheckTodoSchema): ToDoModel;
+  checkToggleItem(toDo: CheckToggleTodoSchema): ToDoModel;
 
   /**
    * Récupération de tous les items
    */
-  getAll(): Array<ToDoModel>
+  getAll(): Promise<Array<ToDoModel>>
 
   /**
    * Récuperation de 1 item
