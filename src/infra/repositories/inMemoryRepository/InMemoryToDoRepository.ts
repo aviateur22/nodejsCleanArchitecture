@@ -1,3 +1,4 @@
+import { TodoEntity } from "../../../domain/entities/todo/TodoEntity";
 import { TodoRepositorySchema } from "../../../domain/ports/repositoriesSchemas/TodoRepositorySchema";
 import { TodoNotFindException } from "../../../exceptions/TodoNotFindException";
 
@@ -12,17 +13,17 @@ class InMemoryToDoRepository implements TodoRepositorySchema {
 
   /**
    * Ajout d'un todo
-   * @param todo 
-   * @returns 
+   * @param {AddTodoSchema} todoSchema 
+   * @returns {TodoModel}
    */
-  async save(todo: AddTodoSchema): Promise<TodoModel> {
+  async save(todoSchema: AddTodoSchema): Promise<TodoModel> {
     // Index
     const index: number = this.todos.length === 0 ? 1 : Math.max(...this.todos.map(x=>Number(x.id))) + 1;
 
     const todoModel = new TodoModel(
       index.toString(),
-      todo.title,
-      todo.description,
+      todoSchema.title,
+      todoSchema.description,
       true,
       new Date(),
       new Date()
@@ -34,25 +35,25 @@ class InMemoryToDoRepository implements TodoRepositorySchema {
 
   /**
    * Mise a jour d'une Todo
-   * @param {UpdateTodoSchema} todo 
+   * @param {UpdateTodoSchema} todoSchema 
    * @returns {TodoModel}
    */
-  async updateOne(todo: UpdateTodoSchema): Promise<TodoModel> {   
+  async updateOne(todoSchema: UpdateTodoSchema): Promise<TodoModel> {   
 
     // Index
-    const index: number = Number(todo.id);
+    const index: number = Number(todoSchema.id);
 
     // Modification des propriété
-    this.todos[index - 1].title = todo.title;
-    this.todos[index - 1].description = todo.description;
-    this.todos[index - 1].status = todo.status;
+    this.todos[index - 1].title = todoSchema.title;
+    this.todos[index - 1].description = todoSchema.description;
+    this.todos[index - 1].status = todoSchema.status;
     this.todos[index - 1].updatedAt = new Date();
     
     return this.todos[index - 1];
 
   }
 
-  checkToggleItem(todo: CheckToggleTodoSchema): TodoModel {
+  checkToggleItem(todoSchema: CheckToggleTodoSchema): TodoModel {
     throw new Error("Method not implemented.");
   }
 
@@ -66,19 +67,19 @@ class InMemoryToDoRepository implements TodoRepositorySchema {
 
   /**
    * Recherche d'une todo
-   * @param {GetOneTodoSchema} todo 
+   * @param {GetOneTodoSchema} todoSchema 
    * @returns {TodoModel|null}
    */
-  async findOne(todo: GetOneTodoSchema): Promise<TodoModel|null> {
-    const findTodo = await this.todos.find(todo => (todo.id === todo.id));
+  async findOne(todoSchema: FindOneTodoSchema): Promise<TodoModel|null> {
+    const findTodo = await this.todos.find(todo => (todoSchema.id === todo.id));
     return findTodo !== undefined ? findTodo : null;
   }
 
   /**
    * Suppression d'une todo
-   * @param {DeleteTodoSchema} Todo 
+   * @param {DeleteTodoSchema} TodoSchema 
    */
-  deleteOne(Todo: DeleteTodoSchema): TodoModel {
+  deleteOne(TodoSchema: DeleteTodoSchema): TodoModel {
     throw new Error("Method not implemented.");
   }
 
