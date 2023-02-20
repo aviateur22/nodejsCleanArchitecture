@@ -47,8 +47,8 @@ class TodoGenerator {
   /**
    * Renvoi les Todo
    */
-  static async getAllTodos() {
-    return await UseCaseServiceImpl.getUseCases().getAllTodoUseCase.execute();
+  static async findAllTodos() {
+    return await UseCaseServiceImpl.getUseCases().findAllToDoUseCase.execute();
   }
 }
 export { TodoGenerator }

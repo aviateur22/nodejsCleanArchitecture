@@ -4,7 +4,7 @@ import { TodoGenerator } from "./utilities/TodoGenerator";
 
 describe('UseCase: getAllTodos', () => {
   // Instance GetAllTodoUseCase
-  const getAllToDoUseCase = UseCaseServiceImpl.getUseCases().getAllTodoUseCase;
+  const getAllToDoUseCase = UseCaseServiceImpl.getUseCases().findAllToDoUseCase;
 
   // Reset de la base de données
   beforeEach(async()=>{
