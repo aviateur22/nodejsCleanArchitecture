@@ -15,10 +15,10 @@ class InMemoryToDoRepository implements TodoRepositorySchema {
    */
   async save(todo: AddTodoSchema): Promise<TodoModel> {
     // Index
-    const index: number = this.todos.length === 0 ? 1 : Math.max(...this.todos.map(x=>x.id)) + 1;
+    const index: number = this.todos.length === 0 ? 1 : Math.max(...this.todos.map(x=>Number(x.id))) + 1;
 
     const todoModel = {
-      id: index,
+      id: index.toString(),
       title: todo.title,
       description: todo.description,
       statut: true,

@@ -1,13 +1,11 @@
-import { RepositoryServiceImpl } from "../../infra/services/repository/RepositoryServiceImpl";
 import { TodoEntityMapper } from "../dtos/TodoMapper";
 import { TodoEntity } from "../entities/todo/TodoEntity";
+import { TodoUseCase } from "./TodoUseCase";
 
 /**
  * Récupération de tous les Todos
  */
-class GetAllTodoUseCase {
-  private repositories = RepositoryServiceImpl.getRepositories().todoRepository;
-
+class GetAllTodoUseCase extends TodoUseCase {
   /**
    * Récupération des todos
    * @returns {Array<TodoEntity>}

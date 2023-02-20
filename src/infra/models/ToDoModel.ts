@@ -3,7 +3,7 @@
  */
 class TodoModel {
 
-  public readonly id: number;
+  public readonly id: string;
   public readonly title: string;
   public readonly description: string;
   public readonly statut: boolean;
@@ -11,7 +11,7 @@ class TodoModel {
   public readonly updatedAt: Date;
 
   constructor(
-    id: number, 
+    id: string, 
     title: string, 
     description: string, 
     statut: boolean,
