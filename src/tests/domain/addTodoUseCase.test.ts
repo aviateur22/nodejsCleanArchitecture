@@ -1,6 +1,8 @@
+import { AddTodoEntity } from "../../domain/entities/todo/AddTodoEntity";
+import { TodoEntity } from "../../domain/entities/todo/TodoEntity";
 import { UseCaseServiceImpl } from "../../domain/services/UseCaseServiceImpl";
+import { InvalidTodoTitleException } from "../../exceptions/InvalidTodoTitleException";
 import { TodoGenerator } from "./utilities/TodoGenerator";
-
 
 describe('UseCase: addItem', ()=>{
 
@@ -10,21 +12,61 @@ describe('UseCase: addItem', ()=>{
   beforeEach(async()=>{
     // Clear tous les todos
     await TodoGenerator.ClearAllTodos();
-
-    // Add 2 todos
-    await TodoGenerator.CreateTodos();   
   });
 
+  // Ajout d'un todo avec un titre et une description
   it('Should add one todo', async()=>{
+    try {
+      const addTodo = await addTodoUseCase.execute({
+        title: 'Mon Titre',
+        description: 'Ma description'
+      });
+  
+      const todos = await UseCaseServiceImpl.getUseCases().getAllTodoUseCase.execute(); 
+  
+      expect(todos.length).toBe(1);
+      expect(todos[0].description).toBe('Ma description');
+      expect(todos[0].title).toBe('Mon Titre')
+      
+    } catch (error) {
+      expect(error).toBeFalsy();
+    }    
+  });
 
-    const addTodo = await addTodoUseCase.execute({
-      title: 'Mon Titre',
-      description: 'Ma descriptiuon'
-    });
+  // Ajout d'une todo sans titre
+  it('Should throw missingTitleException because title is missing', async()=>{
+    try {      
+      const addTodoEntity = new AddTodoEntity('', 'Ma description');
 
+      // Ajout de la todo
+      await addTodoUseCase.execute(addTodoEntity);
+  
+      const todos = await TodoGenerator.getAllTodos();
+      expect(todos.length).toBe(0);      
+      
+    } catch (error) {      
+      expect(error).toBeInstanceOf(InvalidTodoTitleException);
+    }    
+  });
 
-    const todos = await UseCaseServiceImpl.getUseCases().getAllTodoUseCase.execute();
+  // Ajout d'une todo avec un titre et sans descriptuion 
+  it('Should add one todo without description', async()=>{
+    try {      
+      const addTodoEntity = new AddTodoEntity('Mon titre', '');
 
-    expect(todos.length).toBe(3);
+      // Ajout de la todo
+      const addTodo = await addTodoUseCase.execute(addTodoEntity);
+  
+      const todos = await TodoGenerator.getAllTodos();
+
+      expect(todos[0]).toBeInstanceOf(TodoEntity);
+      expect(todos[0].id).toBe("1");
+      expect(addTodo.title).toBe("Mon titre");
+      expect(addTodo.description).toBe("");
+      expect(todos.length).toBe(1);      
+      
+    } catch (error) {      
+      expect(error).toBeFalsy();
+    }
   });
 });

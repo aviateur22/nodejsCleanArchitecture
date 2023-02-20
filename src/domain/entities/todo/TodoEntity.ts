@@ -2,7 +2,7 @@
  * Entity Todo du domain
  */
 class TodoEntity {
-  public readonly id: number;
+  public readonly id: string;
   public readonly title: string;
   public readonly description: string;
   public readonly statut: boolean;
@@ -10,7 +10,7 @@ class TodoEntity {
   public readonly updatedAt: Date;
 
   constructor(
-    id: number, 
+    id: string, 
     title: string, 
     description: string, 
     statut: boolean,

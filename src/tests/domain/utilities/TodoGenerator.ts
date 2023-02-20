@@ -1,3 +1,4 @@
+import { UseCaseServiceImpl } from "../../../domain/services/UseCaseServiceImpl";
 import { RepositoryServiceImpl } from "../../../infra/services/repository/RepositoryServiceImpl";
 
 /**
@@ -39,9 +40,15 @@ class TodoGenerator {
   /**
    * Suppresion de tous les todos
    */
-  static ClearAllTodos() {
+  static async ClearAllTodos() {
     TodoGenerator.repositories.deleteAll();
   }
 
+  /**
+   * Renvoi les Todo
+   */
+  static async getAllTodos() {
+    return await UseCaseServiceImpl.getUseCases().getAllTodoUseCase.execute();
+  }
 }
 export { TodoGenerator }
