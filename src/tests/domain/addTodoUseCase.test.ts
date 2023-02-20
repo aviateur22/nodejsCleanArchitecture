@@ -22,7 +22,7 @@ describe('UseCase: addItem', ()=>{
         description: 'Ma description'
       });
   
-      const todos = await UseCaseServiceImpl.getUseCases().getAllTodoUseCase.execute(); 
+      const todos = await TodoGenerator.findAllTodos();
   
       expect(todos.length).toBe(1);
       expect(todos[0].description).toBe('Ma description');
@@ -41,7 +41,7 @@ describe('UseCase: addItem', ()=>{
       // Ajout de la todo
       await addTodoUseCase.execute(addTodoEntity);
   
-      const todos = await TodoGenerator.getAllTodos();
+      const todos = await TodoGenerator.findAllTodos();
       expect(todos.length).toBe(0);      
       
     } catch (error) {      
@@ -57,7 +57,7 @@ describe('UseCase: addItem', ()=>{
       // Ajout de la todo
       const addTodo = await addTodoUseCase.execute(addTodoEntity);
   
-      const todos = await TodoGenerator.getAllTodos();
+      const todos = await TodoGenerator.findAllTodos();
 
       expect(todos[0]).toBeInstanceOf(TodoEntity);
       expect(todos[0].id).toBe("1");

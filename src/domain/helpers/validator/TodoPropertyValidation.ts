@@ -1,5 +1,6 @@
 import { InvalidTodoDescriptionException } from "../../../exceptions/InvalidTodoDescriptionException";
 import { InvalidTodoIdentityException } from "../../../exceptions/InvalidTodoIdentityException";
+import { InvalidTodoStatusException } from "../../../exceptions/InvalidTodoStatusException";
 import { InvalidTodoTitleException } from "../../../exceptions/InvalidTodoTitleException";
 
 class TodoPropertyValidation<T> {
@@ -35,8 +36,12 @@ class TodoPropertyValidation<T> {
         case 'description':
           this.descriptionPropertyValidation(this.todo[key] as string);
         break;
-      }
-     
+
+        // Status
+        case 'status':
+          this.statusPropertyValidation(this.todo[key] as boolean);
+        break;
+      }     
     }
   }
 
@@ -67,6 +72,16 @@ class TodoPropertyValidation<T> {
   descriptionPropertyValidation(description: string): void {
     if(description.trim().length < 0 ) {
       throw new InvalidTodoDescriptionException();
+    }
+  }
+
+  /**
+   * Validation du status
+   * @param  {boolean} status 
+   */
+  statusPropertyValidation(status: boolean): void {
+    if(status === null) {
+      throw new InvalidTodoStatusException();
     }
   }
 }

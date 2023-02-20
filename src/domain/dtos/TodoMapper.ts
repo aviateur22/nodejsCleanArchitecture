@@ -13,7 +13,7 @@ class TodoEntityMapper {
       todo.id,
       todo.title,
       todo.description,
-      todo.statut,
+      todo.status,
       todo.createdAt,
       todo.updatedAt
     );

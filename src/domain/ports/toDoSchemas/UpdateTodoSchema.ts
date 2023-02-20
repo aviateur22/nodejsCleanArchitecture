@@ -2,7 +2,8 @@
  * Schema pour mettre a jour un item
  */
 interface UpdateTodoSchema {
-  id: number;
+  id: string;
   title: string;
   description: string;
+  status: boolean;
 }

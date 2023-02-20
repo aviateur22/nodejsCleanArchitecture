@@ -1,7 +1,9 @@
+import { TodoUseCase } from "./TodoUseCase";
+
 /**
  * Usecase CheckToDoUseCase
  */
-class CheckTodoUseCase {
+class CheckTodoUseCase extends TodoUseCase {
 
 }
 
