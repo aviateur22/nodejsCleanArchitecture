@@ -1,6 +1,6 @@
-import { AddTodoUseCase } from "../../useCases/AddTodoUseCase"
+import { AddTodoUseCase } from "../../useCases/AddToDoUseCase"
 import { CheckTodoUseCase } from "../../useCases/CheckTodoUseCase";
-import { GetAllTodoUseCase } from "../../useCases/GetAllTodoUseCase";
+import { GetAllTodoUseCase } from "../../useCases/GetAllToDoUseCase";
 import { GetOneTodoUseCase } from "../../useCases/GetOneTodoUseCase";
 import { UpdateTodoUseCase } from "../../useCases/UpdateTodoUseCase";
 
