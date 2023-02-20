@@ -1,3 +1,6 @@
+/**
+ * Exception Description
+ */
 class InvalidTodoDescriptionException extends Error {
 
 }

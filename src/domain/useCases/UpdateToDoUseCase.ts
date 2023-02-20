@@ -26,12 +26,8 @@ class UpdateTodoUseCase extends TodoUseCase {
   async execute(updateTodo: UpdateTodoSchema): Promise<TodoEntity> {
 
     // Recherche existance todo
-    const findTodo = await this.repositories.findOne(updateTodo);
-
-    if(!findTodo) {
-      throw new TodoNotFindException();
-    }
-
+    await this.useCases.findOneTodoUseCase.execute(updateTodo);
+    
     // Mise a jour de données
     const todo = await this.repositories.updateOne(updateTodo);
 

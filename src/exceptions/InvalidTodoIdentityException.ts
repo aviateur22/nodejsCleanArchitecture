@@ -1,3 +1,6 @@
+/**
+ * Exception Identity
+ */
 class InvalidTodoIdentityException extends Error {
 
 }

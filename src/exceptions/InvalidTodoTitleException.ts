@@ -1,3 +1,6 @@
+/**
+ * Exception titre
+ */
 class InvalidTodoTitleException extends Error {
 
 }
