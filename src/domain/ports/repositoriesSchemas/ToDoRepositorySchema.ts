@@ -15,7 +15,7 @@ interface TodoRepositorySchema {
    * Mise a jour des données d'un item
    * @param {UpdateTodoSchema} Todo 
    */
-  update(Todo: UpdateTodoSchema): TodoModel;
+  updateOne(Todo: UpdateTodoSchema): Promise<TodoModel>;
 
   /**
    * Check ou unCheck un item
@@ -26,13 +26,13 @@ interface TodoRepositorySchema {
   /**
    * Récupération de tous les items
    */
-  getAll(): Promise<Array<TodoModel>>
+  findAll(): Promise<Array<TodoModel>>
 
   /**
    * Récuperation de 1 item
    * @param {GetOneTodoSchema} Todo 
    */
-  getOne(Todo: GetOneTodoSchema): TodoModel;
+  findOne(Todo: GetOneTodoSchema): Promise<TodoModel|null>;
 
   /**
    * Suppression de 1 item

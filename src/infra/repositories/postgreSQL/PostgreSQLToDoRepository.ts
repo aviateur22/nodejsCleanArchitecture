@@ -9,16 +9,16 @@ class PostgreSQLToDoRepository implements TodoRepositorySchema {
   async save(toDo: AddTodoSchema): Promise<TodoModel> {
     throw new Error("Method not implemented.");
   }
-  update(toDo: UpdateTodoSchema): TodoModel {
+  updateOne(toDo: UpdateTodoSchema): Promise<TodoModel> {
     throw new Error("Method not implemented.");
   }
   checkToggleItem(toDo: CheckToggleTodoSchema): TodoModel {
     throw new Error("Method not implemented.");
   }
-  async getAll(): Promise<Array<TodoModel>> {
+  async findAll(): Promise<Array<TodoModel>> {
     throw new Error("Method not implemented.");
   }
-  getOne(toDo: GetOneTodoSchema): TodoModel {
+  async findOne(toDo: GetOneTodoSchema): Promise<TodoModel> {
     throw new Error("Method not implemented.");
   }
   deleteOne(Todo: DeleteTodoSchema): TodoModel {

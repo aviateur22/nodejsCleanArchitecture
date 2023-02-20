@@ -1,7 +1,7 @@
 import { AddTodoUseCase } from "../../useCases/AddToDoUseCase"
 import { CheckTodoUseCase } from "../../useCases/CheckTodoUseCase";
-import { GetAllTodoUseCase } from "../../useCases/GetAllToDoUseCase";
-import { GetOneTodoUseCase } from "../../useCases/GetOneTodoUseCase";
+import { FindAllToDoUseCase } from "../../useCases/FindAllToDoUseCase";
+import { FindOneTodoUseCase } from "../../useCases/FindOneTodoUseCase";
 import { UpdateTodoUseCase } from "../../useCases/UpdateTodoUseCase";
 
 /**
@@ -12,15 +12,15 @@ class UseCases {
   readonly addTodoUseCase: AddTodoUseCase;
   readonly checkTodoUseCase: CheckTodoUseCase;
   readonly updateTodoUseCase: UpdateTodoUseCase;
-  readonly getAllTodoUseCase: GetAllTodoUseCase;
-  readonly getOneTodoUseCase: GetOneTodoUseCase;
+  readonly getAllTodoUseCase: FindAllToDoUseCase;
+  readonly getOneTodoUseCase: FindOneTodoUseCase;
 
   constructor() {
-    this.addTodoUseCase = new AddTodoUseCase();
-    this.checkTodoUseCase = new CheckTodoUseCase();
-    this.updateTodoUseCase = new UpdateTodoUseCase();
-    this.getOneTodoUseCase = new GetOneTodoUseCase();
-    this.getAllTodoUseCase = new GetAllTodoUseCase();
+    this.addTodoUseCase = new AddTodoUseCase(this);
+    this.checkTodoUseCase = new CheckTodoUseCase(this);
+    this.updateTodoUseCase = new UpdateTodoUseCase(this);
+    this.getOneTodoUseCase = new FindOneTodoUseCase(this);
+    this.getAllTodoUseCase = new FindAllToDoUseCase(this);
   }
 
 }
