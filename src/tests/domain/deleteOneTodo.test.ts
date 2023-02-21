@@ -12,7 +12,6 @@ describe('DeleteOneTodo useCase', ()=>{
   // findAll useCase
   const findAllTodoUseCase = UseCaseServiceImpl.getUseCases().findAllToDoUseCase;
 
-
   beforeEach(()=>{
     // Suppression des Todos
     TodoGenerator.ClearAllTodos();
