@@ -21,7 +21,7 @@ class PostgreSQLToDoRepository implements TodoRepositorySchema {
   async findOne(toDo: FindOneTodoSchema): Promise<TodoModel> {
     throw new Error("Method not implemented.");
   }
-  deleteOne(Todo: DeleteTodoSchema): TodoModel {
+  deleteOne(Todo: DeleteTodoSchema): Promise<boolean> {
     throw new Error("Method not implemented.");
   }
   async deleteAll(): Promise<boolean> {

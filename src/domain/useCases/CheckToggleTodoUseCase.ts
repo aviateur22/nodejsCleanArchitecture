@@ -16,20 +16,13 @@ class CheckToggleTodoUseCase extends TodoUseCase {
   async execute(todo: CheckToggleTodoSchema): Promise<TodoEntity> {
 
     // Recherche todo
-    const findTodo = await this.useCases.findOneTodoUseCase.execute(todo);
+    await this.useCases.findOneTodoUseCase.execute(todo);
 
     // Mise a jour status
     const checkToggleTodo = await this.repositories.checkToggleItem(todo);
 
-    return TodoEntityMapper.getTodoEntity(new TodoModel(
-      findTodo.id,
-      findTodo.title,
-      findTodo.description,
-      todo.status,
-      findTodo.createdAt,
-      new Date()
-
-    ));
+    // renvoie la Todo mis a jour
+    return TodoEntityMapper.getTodoEntity(checkToggleTodo);
   }
 
 }

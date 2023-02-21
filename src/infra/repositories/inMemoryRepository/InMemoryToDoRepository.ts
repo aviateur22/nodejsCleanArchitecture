@@ -59,6 +59,11 @@ class InMemoryToDoRepository implements TodoRepositorySchema {
 
   }
 
+  /**
+   * 
+   * @param todoSchema 
+   * @returns 
+   */
   async checkToggleItem(todoSchema: CheckToggleTodoSchema): Promise<TodoModel> {
     // Index
     const index: number = Number(todoSchema.id);
@@ -92,8 +97,19 @@ class InMemoryToDoRepository implements TodoRepositorySchema {
    * Suppression d'une todo
    * @param {DeleteTodoSchema} TodoSchema 
    */
-  deleteOne(TodoSchema: DeleteTodoSchema): TodoModel {
-    throw new Error("Method not implemented.");
+  async deleteOne(TodoSchema: DeleteTodoSchema): Promise<boolean> {
+    
+    // Recherche de l'index
+    const todoIndex: number = this.todos.findIndex(todo=> todo.id === TodoSchema.id);
+
+    if(todoIndex < 0) {
+      throw new TodoNotFindException();
+    }
+
+    // Suppression de la todo
+    this.todos.splice(todoIndex, 1);
+
+    return true;
   }
 
   /**
