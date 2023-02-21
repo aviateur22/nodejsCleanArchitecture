@@ -1,5 +1,4 @@
-import { TodoEntity } from "../../../domain/entities/todo/TodoEntity";
-import { TodoRepositorySchema } from "../../../domain/ports/repositoriesSchemas/TodoRepositorySchema";
+import { TodoRepositorySchema } from "../../../domain/ports/repositoriesSchemas/ToDoRepositorySchema";
 import { TodoNotFindException } from "../../../exceptions/TodoNotFindException";
 
 import { TodoModel } from "../../models/TodoModel";
@@ -24,7 +23,7 @@ class InMemoryToDoRepository implements TodoRepositorySchema {
       index.toString(),
       todoSchema.title,
       todoSchema.description,
-      true,
+      todoSchema.status,
       new Date(),
       new Date()
     )
@@ -45,16 +44,30 @@ class InMemoryToDoRepository implements TodoRepositorySchema {
 
     // Modification des propriété
     this.todos[index - 1].title = todoSchema.title;
-    this.todos[index - 1].description = todoSchema.description;
+    this.todos[index - 1].description = todoSchema.description;  
+    this.todos[index - 1].updatedAt = new Date();
+
+    const updateTodo = await this.findOne(todoSchema);
+
+    if(!updateTodo) {
+      throw new TodoNotFindException();
+    }
+
+    console.log(updateTodo);
+    
+    return updateTodo;
+
+  }
+
+  async checkToggleItem(todoSchema: CheckToggleTodoSchema): Promise<TodoModel> {
+    // Index
+    const index: number = Number(todoSchema.id);
+
+    // Modification des propriété
     this.todos[index - 1].status = todoSchema.status;
     this.todos[index - 1].updatedAt = new Date();
     
     return this.todos[index - 1];
-
-  }
-
-  checkToggleItem(todoSchema: CheckToggleTodoSchema): TodoModel {
-    throw new Error("Method not implemented.");
   }
 
   /**

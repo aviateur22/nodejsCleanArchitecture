@@ -5,7 +5,7 @@ class TodoEntity {
   public readonly id: string;
   public readonly title: string;
   public readonly description: string;
-  public readonly statut: boolean;
+  public readonly status: boolean;
   public readonly createdAt: Date;
   public readonly updatedAt: Date;
 
@@ -13,14 +13,14 @@ class TodoEntity {
     id: string, 
     title: string, 
     description: string, 
-    statut: boolean,
+    status: boolean,
     createdAt: Date,
     updatedAt: Date
     ) {
     this.id = id;
     this.title = title;
     this.description = description;
-    this.statut = statut;
+    this.status = status;
     this.updatedAt = updatedAt,
     this.createdAt = createdAt
   }

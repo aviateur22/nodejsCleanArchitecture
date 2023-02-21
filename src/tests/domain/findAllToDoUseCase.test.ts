@@ -16,8 +16,7 @@ describe('UseCase: getAllTodos', () => {
   });
 
   it('Should find 2 todos', async() => {
-    try {
-      
+    try {      
       // Recupération des Todos
       const todos = await getAllToDoUseCase.execute();
 
