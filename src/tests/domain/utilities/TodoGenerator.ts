@@ -17,11 +17,13 @@ class TodoGenerator {
   private static todos: Array<AddTodoSchema> = [
     {
       title: 'Title 1',
-      description: 'Description 1'
+      description: 'Description 1',
+      status: false
     },
     {     
       title: 'Title 2',
-      description: 'Description 2'
+      description: 'Description 2',
+      status: false
     }
   ]
 

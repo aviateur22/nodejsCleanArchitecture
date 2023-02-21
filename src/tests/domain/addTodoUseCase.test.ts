@@ -19,7 +19,8 @@ describe('UseCase: addItem', ()=>{
     try {
       const addTodo = await addTodoUseCase.execute({
         title: 'Mon Titre',
-        description: 'Ma description'
+        description: 'Ma description',
+        status: false
       });
   
       const todos = await TodoGenerator.findAllTodos();

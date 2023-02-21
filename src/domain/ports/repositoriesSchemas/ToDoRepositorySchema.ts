@@ -21,7 +21,7 @@ interface TodoRepositorySchema {
    * Check ou unCheck un item
    * @param {CheckItemSchema} Todo 
    */
-  checkToggleItem(Todo: CheckToggleTodoSchema): TodoModel;
+  checkToggleItem(Todo: CheckToggleTodoSchema): Promise<TodoModel>;
 
   /**
    * Récupération de tous les items
@@ -30,9 +30,9 @@ interface TodoRepositorySchema {
 
   /**
    * Récuperation de 1 item
-   * @param {GetOneTodoSchema} Todo 
+   * @param {FindOneTodoSchema} Todo 
    */
-  findOne(Todo: GetOneTodoSchema): Promise<TodoModel|null>;
+  findOne(Todo: FindOneTodoSchema): Promise<TodoModel|null>;
 
   /**
    * Suppression de 1 item

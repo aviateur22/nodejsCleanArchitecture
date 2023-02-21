@@ -30,8 +30,9 @@ describe('Update todo UseCase', ()=>{
 
       // Mise à jour de la todo
       const todo = await updateTodoUseCase.execute(updateTodo);
+      
       expect(todo.id).toBe(updateTodo.id);
-      expect(todo.statut).toBe(updateTodo.status);
+      expect(todo.status).toBe(updateTodo.status);
       expect(todo.title).toBe(updateTodo.title);
       expect(todo.description).toBe(updateTodo.description);
       
@@ -75,7 +76,7 @@ describe('Update todo UseCase', ()=>{
       // Mise à jour de la todo
       const todo = await updateTodoUseCase.execute(updateTodo);
       expect(todo.id).toBe(updateTodo.id);
-      expect(todo.statut).toBe(updateTodo.status);
+      expect(todo.status).toBe(updateTodo.status);
       expect(todo.title).toBe(updateTodo.title);
       expect(todo.description).toBe(updateTodo.description);
       
