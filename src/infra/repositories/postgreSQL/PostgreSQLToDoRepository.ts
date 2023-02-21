@@ -1,4 +1,4 @@
-import { TodoRepositorySchema } from "../../../domain/ports/repositoriesSchemas/ToDoRepositorySchema";
+import { TodoRepositorySchema } from "../../../domain/ports/repositoriesSchemas/TodoRepositorySchema";
 import { TodoModel } from "../../models/TodoModel";
 
 /**
