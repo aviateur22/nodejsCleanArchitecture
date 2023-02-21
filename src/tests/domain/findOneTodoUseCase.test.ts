@@ -35,8 +35,7 @@ describe('Find one TodoUseCase', ()=>{
       const findTodoEntity: FindOneTodoSchema = new FindTodoEntity('3');
       const findTodo = await findOneTodoUseCase.execute(findTodoEntity);  
       expect(findTodo).toBeFalsy();
-    } catch (error) {
-      console.log(error);
+    } catch (error) {     
       expect(error).toBeInstanceOf(TodoNotFindException)
     }
   });

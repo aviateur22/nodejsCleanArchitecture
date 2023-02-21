@@ -5,9 +5,11 @@ import app from './app'
  * Class pour test uniatire
  */
 class Server {
-  protected port: number; 
 
-  constructor(port: number) {
+  // Port
+  protected port: string; 
+
+  constructor(port: string) {
     this.port = port;
   }
 
@@ -15,9 +17,13 @@ class Server {
    * Démarrage du server
    */
   async startServer(): Promise<void> {
-    const server = http.createServer(app);    
+    
+    const server = http.createServer(app);       
 
-    await new Promise((resolve)=>server.listen(this.port, ()=> resolve(app)));
+    server.listen(this.port, () => {  
+      console.log(`http://localhost:${this.port}`);
+    });
+
   }
 }
 export { Server }
