@@ -1,5 +1,6 @@
 import { AddTodoUseCase } from "../../useCases/AddToDoUseCase"
 import { CheckToggleTodoUseCase } from "../../useCases/CheckToggleTodoUseCase";
+import { DeleteOneTodoUseCase } from "../../useCases/DeleteOneTodoUseCase";
 import { FindAllToDoUseCase } from "../../useCases/FindAllToDoUseCase";
 import { FindOneTodoUseCase } from "../../useCases/FindOneTodoUseCase";
 import { UpdateTodoUseCase } from "../../useCases/UpdateToDoUseCase";
@@ -14,6 +15,7 @@ class UseCases {
   readonly updateTodoUseCase: UpdateTodoUseCase;
   readonly findAllToDoUseCase: FindAllToDoUseCase;
   readonly findOneTodoUseCase: FindOneTodoUseCase;
+  readonly deleteOneTodoUseCase: DeleteOneTodoUseCase
 
   constructor() {
     this.addTodoUseCase = new AddTodoUseCase(this);
@@ -21,6 +23,7 @@ class UseCases {
     this.updateTodoUseCase = new UpdateTodoUseCase(this);
     this.findOneTodoUseCase = new FindOneTodoUseCase(this);
     this.findAllToDoUseCase = new FindAllToDoUseCase(this);
+    this.deleteOneTodoUseCase = new DeleteOneTodoUseCase(this);
   }
 
 }

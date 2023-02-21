@@ -38,7 +38,7 @@ interface TodoRepositorySchema {
    * Suppression de 1 item
    * @param Todo 
    */
-  deleteOne(Todo: DeleteTodoSchema): TodoModel;
+  deleteOne(Todo: DeleteTodoSchema): Promise<boolean>;
 
   /**
    * Suppression de tous les todos
