@@ -46,4 +46,30 @@ describe('StartServer', ()=>{
     expect(res.body).toHaveProperty('errorMessage');
     expect(res.body.errorMessage).toBe('managed error');
   });
+
+  // Path vérification email
+  it('Should throw error 400 because email format is not valid', async()=>{
+    const res = await request(app)
+    .post('/test-email')
+    .set('Accept', 'application/json')
+    .send({
+      email: 'avia'
+    });
+    expect(res.statusCode).toBe(400);
+    expect(res.body).toHaveProperty('errorMessage');
+    expect(res.body.errorMessage).toBe('incorrect email format');
+  });
+
+  // Path vérification email
+  it('Should res with a statusCode of 200 because meail is valid', async()=>{
+    const res = await request(app)
+    .post('/test-email')
+    .set('Accept', 'application/json')
+    .send({
+      email: 'avia@hotmail.fr'
+    });
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toHaveProperty('message');
+    expect(res.body.message).toBe('done');
+  });
 });
