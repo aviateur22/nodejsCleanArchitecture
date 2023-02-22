@@ -6,7 +6,7 @@ import { TodoUseCase } from "./TodoUseCase";
  * Ajout d'un nouveau ToDo
  */
 class AddTodoUseCase extends TodoUseCase {  
-
+  
   /**
    * Ajout d'un todo
    * @param {AddTodoSchema} todo - Todo a ajouter 

@@ -1,5 +1,5 @@
-import { TodoNotFindException } from "../../exceptions/TodoNotFindException";
 import { TodoModel } from "../../infra/models/TodoModel";
+import { RepositoryServiceImpl } from "../../infra/services/repository/RepositoryServiceImpl";
 import { TodoEntityMapper } from "../dtos/TodoMapper";
 import { TodoEntity } from "../entities/todo/TodoEntity";
 import { UseCases } from "../helpers/useCases/UseCases";
@@ -9,15 +9,7 @@ import { TodoUseCase } from "./TodoUseCase";
  * Mise a jour du contenue d'une Todo
  */
 class UpdateTodoUseCase extends TodoUseCase {
-
-  /**
-   * 
-   * @param useCases 
-   */
-  constructor(useCases: UseCases) {
-    super(useCases);
-  }
-
+  
   /**
    * Mise a jour d'une Todo
    * @param { UpdateTodoSchema } updateUseCase 

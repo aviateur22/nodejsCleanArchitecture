@@ -1,9 +1,13 @@
 import { UpdateTodoEntity } from "../../domain/entities/todo/UpdateTodoEntity";
 import { UseCaseServiceImpl } from "../../domain/services/UseCaseServiceImpl";
 import { InvalidTodoTitleException } from "../../exceptions/InvalidTodoTitleException";
+import { SelectRepositories } from "./utilities/SelectRepositories";
 import { TodoGenerator } from "./utilities/TodoGenerator";
 
 describe('Update todo UseCase', ()=>{
+  //Selection du repository
+  SelectRepositories.SelectSource();
+
   // Instance UpdateTodo
   const updateTodoUseCase = UseCaseServiceImpl.getUseCases().updateTodoUseCase;
 

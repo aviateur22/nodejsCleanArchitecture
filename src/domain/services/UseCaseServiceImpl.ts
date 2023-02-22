@@ -14,7 +14,7 @@ class UseCaseServiceImpl {
    * Récupération des UsesCases 
    * @returns { UseCases }
    */
-  static getUseCases(): UseCases {
+  static getUseCases(): UseCases {   
     if(!UseCaseServiceImpl.useCases) {
       UseCaseServiceImpl.useCases = new UseCases();
     }

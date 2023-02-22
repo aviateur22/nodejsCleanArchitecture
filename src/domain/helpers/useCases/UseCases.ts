@@ -10,6 +10,7 @@ import { UpdateTodoUseCase } from "../../useCases/UpdateToDoUseCase";
  */
 class UseCases {
 
+  
   readonly addTodoUseCase: AddTodoUseCase;
   readonly CheckToggleTodoUseCase: CheckToggleTodoUseCase;
   readonly updateTodoUseCase: UpdateTodoUseCase;
