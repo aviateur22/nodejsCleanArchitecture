@@ -1,12 +1,13 @@
 import { TodoRepositorySchema } from "../../../domain/ports/repositoriesSchemas/TodoRepositorySchema";
 import { TodoModel } from "../../models/TodoModel";
+import client from './databaseConnexion'
 
 /**
  * Base de données PostgreSQL
  */
 class PostgreSQLToDoRepository implements TodoRepositorySchema {
   
-  async save(toDo: AddTodoSchema): Promise<TodoModel> {
+  async save(toDo: AddTodoSchema): Promise<TodoModel> {    
     throw new Error("Method not implemented.");
   }
   updateOne(toDo: UpdateTodoSchema): Promise<TodoModel> {
