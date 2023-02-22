@@ -1,5 +1,4 @@
 import request from 'supertest';
-import { ErrorTestException } from '../../exceptions/ErrorTestException';
 import app from '../../infra/frameworks/app';
 import { Server } from '../../infra/frameworks/server';
 
