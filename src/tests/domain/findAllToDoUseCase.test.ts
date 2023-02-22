@@ -1,11 +1,11 @@
 import { TodoEntity } from "../../domain/entities/todo/TodoEntity";
 import { UseCaseServiceImpl } from "../../domain/services/UseCaseServiceImpl";
-import { SelectRepositories } from "./utilities/SelectRepositories";
+import { SelectServices } from "./utilities/SelectServices";
 import { TodoGenerator } from "./utilities/TodoGenerator";
 
 describe('UseCase: getAllTodos', () => {  
   //Selection du repository
-  SelectRepositories.SelectSource();
+  SelectServices.SelectRepositoriesSource();
 
   // Instance GetAllTodoUseCase
   const getAllToDoUseCase = UseCaseServiceImpl.getUseCases().findAllToDoUseCase;

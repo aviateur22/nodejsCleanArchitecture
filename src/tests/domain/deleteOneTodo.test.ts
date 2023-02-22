@@ -2,12 +2,12 @@ import { DeleteTodoEntity } from "../../domain/entities/todo/DeleteTodoEntity";
 import { TodoEntity } from "../../domain/entities/todo/TodoEntity";
 import { UseCaseServiceImpl } from "../../domain/services/UseCaseServiceImpl";
 import { TodoNotFindException } from "../../exceptions/TodoNotFindException";
-import { SelectRepositories } from "./utilities/SelectRepositories";
+import { SelectServices } from "./utilities/SelectServices";
 import { TodoGenerator } from "./utilities/TodoGenerator";
 
 describe('DeleteOneTodo useCase', ()=>{
   //Selection du repository
-  SelectRepositories.SelectSource();
+  SelectServices.SelectRepositoriesSource();
 
   // delete useCase
   const deleteTodoUseCase = UseCaseServiceImpl.getUseCases().deleteOneTodoUseCase;

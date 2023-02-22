@@ -13,8 +13,7 @@ class TodoUseCase {
   protected useCases: UseCases;
 
   constructor(useCases: UseCases) {
-    this.useCases = useCases;    
-    console.log(this.repositories);
+    this.useCases = useCases;
   }
 }
 

@@ -2,12 +2,12 @@ import { AddTodoEntity } from "../../domain/entities/todo/AddTodoEntity";
 import { TodoEntity } from "../../domain/entities/todo/TodoEntity";
 import { UseCaseServiceImpl } from "../../domain/services/UseCaseServiceImpl";
 import { InvalidTodoTitleException } from "../../exceptions/InvalidTodoTitleException";
-import { SelectRepositories } from "./utilities/SelectRepositories";
+import { SelectServices } from "./utilities/SelectServices";
 import { TodoGenerator } from "./utilities/TodoGenerator";
 
 describe('UseCase: addItem', ()=>{
     //Selection du repository
-    SelectRepositories.SelectSource();
+    SelectServices.SelectRepositoriesSource();
 
   // Instance GetAllTodoUseCase
   const addTodoUseCase = UseCaseServiceImpl.getUseCases().addTodoUseCase;

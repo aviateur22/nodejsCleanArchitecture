@@ -13,7 +13,7 @@ class RepositoryServiceImpl {
   private static repositories: Repositories;
 
   /**
-   * Selection du type de base de données
+   * Selection repositories
    * @returns { void }
    */
   static setRepositories(selectRepositorySource: number): void {
@@ -32,7 +32,7 @@ class RepositoryServiceImpl {
 
     // Repository non défini
     if(typeof RepositoryServiceImpl.repositories === 'undefined') {      
-      throw new RepositoryException();     
+      throw new RepositoryException('no repository selected');     
     }
     return RepositoryServiceImpl.repositories
 

@@ -1,12 +1,12 @@
 import { CheckToggleTodoEntity } from "../../domain/entities/todo/CheckToggleTodoEntity";
 import { UseCaseServiceImpl } from "../../domain/services/UseCaseServiceImpl";
 import { TodoNotFindException } from "../../exceptions/TodoNotFindException";
-import { SelectRepositories } from "./utilities/SelectRepositories";
+import { SelectServices } from "./utilities/SelectServices";
 import { TodoGenerator } from "./utilities/TodoGenerator";
 
 describe('UseCase: getAllTodos', () => {  
   //Selection du repository
-  SelectRepositories.SelectSource();
+  SelectServices.SelectRepositoriesSource();
 
   // Instance GetAllTodoUseCase
   const checkTodoUseCase = UseCaseServiceImpl.getUseCases().CheckToggleTodoUseCase;  
