@@ -1,4 +1,5 @@
 import { TodoNotFindException } from "../../exceptions/TodoNotFindException";
+import { RepositoryServiceImpl } from "../../infra/services/repository/RepositoryServiceImpl";
 import { TodoEntityMapper } from "../dtos/TodoMapper";
 import { TodoEntity } from "../entities/todo/TodoEntity";
 import { TodoUseCase } from "./TodoUseCase";
@@ -7,7 +8,7 @@ import { TodoUseCase } from "./TodoUseCase";
  * Récupération d'une ToDo
  */
 class FindOneTodoUseCase extends TodoUseCase {
-
+  
   /**
    * Recherhce d'une Todo
    * @param {FindOneTodoSchema} todo 

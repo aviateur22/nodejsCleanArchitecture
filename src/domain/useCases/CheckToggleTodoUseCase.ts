@@ -1,4 +1,5 @@
 import { TodoModel } from "../../infra/models/TodoModel";
+import { RepositoryServiceImpl } from "../../infra/services/repository/RepositoryServiceImpl";
 import { TodoEntityMapper } from "../dtos/TodoMapper";
 import { TodoEntity } from "../entities/todo/TodoEntity";
 import { TodoUseCase } from "./TodoUseCase";
@@ -7,7 +8,7 @@ import { TodoUseCase } from "./TodoUseCase";
  * Usecase CheckToDoUseCase
  */
 class CheckToggleTodoUseCase extends TodoUseCase {
-
+  
   /**
    * 
    * @param {CheckToggleTodoSchema} todo 

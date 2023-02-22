@@ -1,12 +1,13 @@
 import { RepositoryServiceImpl } from "../../infra/services/repository/RepositoryServiceImpl";
 import { UseCases } from "../helpers/useCases/UseCases";
+import { TodoRepositorySchema } from "../ports/repositoriesSchemas/TodoRepositorySchema";
 
 /**
  * UseCaseModel  ayant l'acces au repositories
  */
 class TodoUseCase {
   // Acces au repositories
-  protected repositories = RepositoryServiceImpl.getRepositories().todoRepository;
+  protected repositories: TodoRepositorySchema = RepositoryServiceImpl.getRepository().todoRepository;
 
   // UseCase de disponible
   protected useCases: UseCases;

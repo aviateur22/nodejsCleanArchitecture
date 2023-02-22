@@ -52,8 +52,6 @@ class InMemoryToDoRepository implements TodoRepositorySchema {
     if(!updateTodo) {
       throw new TodoNotFindException();
     }
-
-    console.log(updateTodo);
     
     return updateTodo;
 

@@ -1,3 +1,4 @@
+import { TodoRepositorySchema } from "../../../domain/ports/repositoriesSchemas/TodoRepositorySchema";
 import { UseCaseServiceImpl } from "../../../domain/services/UseCaseServiceImpl";
 import { RepositoryServiceImpl } from "../../../infra/services/repository/RepositoryServiceImpl";
 
@@ -7,13 +8,16 @@ import { RepositoryServiceImpl } from "../../../infra/services/repository/Reposi
 class TodoGenerator {
 
   /**
-   * Repositories
+   * Récupération du repository
+   * @returns { TodoRepositorySchema }
    */
-  private static readonly repositories = RepositoryServiceImpl.getRepositories().todoRepository;
+  private static getRepository(): TodoRepositorySchema {  
+    return RepositoryServiceImpl.getRepository().todoRepository;
+  }
 
   /**
    * Todos a ajouter
-   */
+   */  
   private static todos: Array<AddTodoSchema> = [
     {
       title: 'Title 1',
@@ -35,7 +39,7 @@ class TodoGenerator {
   static async CreateTodos() {
 
     TodoGenerator.todos.forEach(async todo => {
-      await TodoGenerator.repositories.save(todo);
+      await TodoGenerator.getRepository().save(todo);
     });
   }
 
@@ -43,7 +47,7 @@ class TodoGenerator {
    * Suppresion de tous les todos
    */
   static async ClearAllTodos() {
-    TodoGenerator.repositories.deleteAll();
+    TodoGenerator.getRepository().deleteAll();
   }
 
   /**

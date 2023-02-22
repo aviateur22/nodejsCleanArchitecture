@@ -1,12 +1,15 @@
 import { FindTodoEntity } from "../../domain/entities/todo/FindTodoEntity";
 import { UseCaseServiceImpl } from "../../domain/services/UseCaseServiceImpl";
 import { TodoNotFindException } from "../../exceptions/TodoNotFindException";
+import { SelectServices } from "./utilities/SelectServices";
 import { TodoGenerator } from "./utilities/TodoGenerator";
 
 describe('Find one TodoUseCase', ()=>{
+  //Selection du repository
+  SelectServices.SelectRepositoriesSource();
 
   // Instance GetAllTodoUseCase
-  const findOneTodoUseCase = UseCaseServiceImpl.getUseCases().findOneTodoUseCase
+  const findOneTodoUseCase = UseCaseServiceImpl.getUseCases().findOneTodoUseCase;
 
   beforeEach(()=>{
     // Clear tous les todos
@@ -35,8 +38,7 @@ describe('Find one TodoUseCase', ()=>{
       const findTodoEntity: FindOneTodoSchema = new FindTodoEntity('3');
       const findTodo = await findOneTodoUseCase.execute(findTodoEntity);  
       expect(findTodo).toBeFalsy();
-    } catch (error) {
-      console.log(error);
+    } catch (error) {     
       expect(error).toBeInstanceOf(TodoNotFindException)
     }
   });
