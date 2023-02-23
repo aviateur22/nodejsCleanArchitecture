@@ -1,9 +1,13 @@
 import request from 'supertest';
-import app from '../../infra/frameworks/app';
 import { Server } from './utilities/server';
 import { SelectServices } from '../domain/utilities/SelectServices';
+import { ServerSource } from '../../infra/helpers/server/ServerSource';
+import { ServerServiceImpl } from '../../infra/services/server/ServerServiceImpl';
 
 describe('StartServer', ()=>{
+
+  // Selection Server Express
+  const app = ServerServiceImpl.setServer(ServerSource.express);
 
   // Selection logger
   SelectServices.selectLoggerSource();

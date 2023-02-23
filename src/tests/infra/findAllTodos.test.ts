@@ -1,7 +1,7 @@
 import request from 'supertest';
-import app from '../../infra/frameworks/app';
-import { Server } from './utilities/server';
 import { SelectServices } from '../domain/utilities/SelectServices';
+import { ServerServiceImpl } from '../../infra/services/server/ServerServiceImpl';
+import { ServerSource } from '../../infra/helpers/server/ServerSource';
 
 describe('findAlltodos', ()=>{
 
@@ -17,6 +17,10 @@ describe('findAlltodos', ()=>{
   });
 
   it('Should find all the todos avail', async()=>{
+
+    // Selection Server Express
+    const app = ServerServiceImpl.setServer(ServerSource.express);
+
     const res = await request(app)
     .get('/api/v1/todo/find-all-todos')
 
