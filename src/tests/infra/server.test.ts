@@ -1,6 +1,6 @@
 import request from 'supertest';
 import app from '../../infra/frameworks/app';
-import { Server } from '../../infra/frameworks/server';
+import { Server } from './utilities/server';
 import { SelectServices } from '../domain/utilities/SelectServices';
 
 describe('StartServer', ()=>{

@@ -1,6 +1,6 @@
 import request from 'supertest';
 import app from '../../infra/frameworks/app';
-import { Server } from '../../infra/frameworks/server';
+import { Server } from './utilities/server';
 import { SelectServices } from '../domain/utilities/SelectServices';
 
 describe('findAlltodos', ()=>{
@@ -12,8 +12,8 @@ describe('findAlltodos', ()=>{
   // Repositories
   SelectServices.SelectRepositoriesSource();
 
-    const server = new Server('5000');
-    await server.startServer();
+    // const server = new Server('5000');
+    // await server.startServer();
   });
 
   it('Should find all the todos avail', async()=>{

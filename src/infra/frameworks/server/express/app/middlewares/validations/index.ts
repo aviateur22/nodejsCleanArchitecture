@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { ValidationException } from "../../../../../exceptions/ValidationException";
+import { ValidationException } from "../../../../../../../exceptions/ValidationException";
 
 /**
  * Validation de données
