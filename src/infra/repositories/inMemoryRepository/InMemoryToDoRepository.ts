@@ -50,7 +50,7 @@ class InMemoryToDoRepository implements TodoRepositorySchema {
     const updateTodo = await this.findOne(todoSchema);
 
     if(!updateTodo) {
-      throw new TodoNotFindException();
+      throw new TodoNotFindException('todo not find');
     }
     
     return updateTodo;
@@ -101,7 +101,7 @@ class InMemoryToDoRepository implements TodoRepositorySchema {
     const todoIndex: number = this.todos.findIndex(todo=> todo.id === TodoSchema.id);
 
     if(todoIndex < 0) {
-      throw new TodoNotFindException();
+      throw new TodoNotFindException('todo not find');
     }
 
     // Suppression de la todo

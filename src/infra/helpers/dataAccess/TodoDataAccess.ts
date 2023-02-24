@@ -2,6 +2,7 @@ import { TodoEntity } from '../../../domain/entities/todo/TodoEntity';
 import { UseCaseServiceImpl } from '../../../domain/services/UseCaseServiceImpl';
 import { AddTodoUseCase } from '../../../domain/useCases/AddToDoUseCase';
 import { FindAllToDoUseCase } from '../../../domain/useCases/FindAllToDoUseCase';
+import { UpdateTodoUseCase } from '../../../domain/useCases/UpdateToDoUseCase';
 import { ValidationException } from '../../../exceptions/ValidationException';
 
 export class TodoDataAccess {
@@ -21,11 +22,12 @@ export class TodoDataAccess {
    * Ajout d'une todo
    * @param { string } title 
    * @param { string } description 
+   * @returns { TodoEntity } - todo ajouté
    */
-  static async addTodo(title: string, description: string) {
+  static async addTodo(title: string, description: string): Promise<TodoEntity> {
     
-     // Vérification de la description
-     if(typeof description === 'undefined') {      
+    // Vérification de la description
+    if(typeof description === 'undefined') {      
       description = '';
     }
     
@@ -42,7 +44,55 @@ export class TodoDataAccess {
     
     // UseCase
     const addTodoUseCase: AddTodoUseCase = UseCaseServiceImpl.getUseCases().addTodoUseCase;   
-    const addTodo = await addTodoUseCase.execute(todo);
+    const addTodo: TodoEntity = await addTodoUseCase.execute(todo);
     return addTodo;
+  }
+
+  /**
+   * Mise à jour d'une Todo
+   * @param id 
+   * @param title 
+   * @param description 
+   * @param status 
+   */
+  static async updateTodo(
+    id: string, 
+    title: string, 
+    description: 
+    string, 
+    status: boolean
+  ): Promise<TodoEntity> {
+    // Vérification de la description
+    if(typeof id === 'undefined') {
+      throw new ValidationException('id is mandatory');
+    }
+
+    // Vérification de la description
+    if(typeof description === 'undefined') {      
+      description = '';
+    }
+    
+    // Vérification de la description
+    if(typeof title === 'undefined') {
+      throw new ValidationException('title is mandatory');
+    }
+
+    // Vérification de la description
+    if(typeof status === 'undefined') {
+      throw new ValidationException('status is mandatory');
+    }
+
+    // Todo a mettre a jour
+    const todo: UpdateTodoSchema = {
+      id,
+      title,
+      description,
+      status
+    }
+
+    // UseCase
+    const updateTodoUseCase: UpdateTodoUseCase = UseCaseServiceImpl.getUseCases().updateTodoUseCase;   
+    const updateTodo: TodoEntity = await updateTodoUseCase.execute(todo);
+    return updateTodo;
   }
 }

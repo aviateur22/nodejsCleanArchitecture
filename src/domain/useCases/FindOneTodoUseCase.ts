@@ -17,7 +17,7 @@ class FindOneTodoUseCase extends TodoUseCase {
     const findTodo = await this.repositories.findOne(todo);
 
     if(!findTodo) {
-      throw new TodoNotFindException();
+      throw new TodoNotFindException('todo not find');
     }
 
     return TodoEntityMapper.getTodoEntity(findTodo);

@@ -14,6 +14,7 @@ export default Joi.object({
     // Description
     description: Joi
     .string()
+    .min(0)
     .messages({        
         'string.pattern.base': 'incorrect description'        
     })

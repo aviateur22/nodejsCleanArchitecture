@@ -4,9 +4,9 @@ import request from 'supertest';
 import { SelectServices } from "../domain/utilities/SelectServices";
 import { TodoGenerator } from "../domain/utilities/TodoGenerator";
 import { UseCaseServiceImpl } from "../../domain/services/UseCaseServiceImpl";
-import { TodoEntity } from "../../domain/entities/todo/TodoEntity";
 
-describe('',()=>{
+
+describe('AddTodo',()=>{
 
   // Server Express
   const app = ServerServiceImpl.setServer(ServerSource.express);
