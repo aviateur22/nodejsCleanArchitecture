@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { TodoDAL } from "../../../../../services/dataAccessLayer/todos/TodoDAL";
+import { TodoDataAccess } from "../../../../../helpers/dataAccess/TodoDataAccess";
 
 
 export default {
@@ -11,12 +11,28 @@ export default {
    * @param { NextFunction } next 
    */
   findAllTodos: async(req: Request, res: Response, next: NextFunction)=>{
-    //
-    const todos = await TodoDAL.findAllTodos();
+    // Récupération des todos
+    const todos = await TodoDataAccess.findAllTodos();
 
-    console.log(todos);
     res.json({
       todos
+    })
+  },
+
+  /**
+   * Ajout d'une Todo
+   * @param req 
+   * @param res 
+   * @param next 
+   */
+  addTodo: async(req: Request, res: Response, next: NextFunction) => {
+
+    let { title, description } = req.body;
+
+    // Ajout de la todo
+    const todo = await TodoDataAccess.addTodo(title, description);    
+    res.status(201).json({
+      todo
     })
   }
 }

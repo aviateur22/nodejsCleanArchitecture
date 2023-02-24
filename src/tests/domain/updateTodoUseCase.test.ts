@@ -1,6 +1,6 @@
 import { UpdateTodoEntity } from "../../domain/entities/todo/UpdateTodoEntity";
 import { UseCaseServiceImpl } from "../../domain/services/UseCaseServiceImpl";
-import { InvalidTodoTitleException } from "../../exceptions/InvalidTodoTitleException";
+import { ValidationException } from "../../exceptions/ValidationException";
 import { SelectServices } from "./utilities/SelectServices";
 import { TodoGenerator } from "./utilities/TodoGenerator";
 
@@ -61,7 +61,7 @@ describe('Update todo UseCase', ()=>{
       const todo = await updateTodoUseCase.execute(updateTodo);
       expect(todo).toBeFalsy();
     } catch (error) {      
-      expect(error).toBeInstanceOf(InvalidTodoTitleException);
+      expect(error).toBeInstanceOf(ValidationException);
     }
   });
 
