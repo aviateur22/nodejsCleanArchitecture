@@ -91,5 +91,28 @@ export default {
     res.json({
       todo
     })
+  },
+
+  /**
+   * CheckToggle d'une Todo
+   * @param { Request } req 
+   * @param { Response } res 
+   * @param { NextFunction } next 
+   */
+  checkToggleOneTodo: async(req: Request, res: Response, next: NextFunction)=>{
+    // id Todo
+    const id: string = req.params.id;
+
+    // Status
+    const { status } = req.body;
+
+    console.log('ici')
+
+    // CheckToggle
+    const todo = await TodoDataAccess.checkToggleOneTodo(id, status);
+
+    res.json({
+      todo
+    })
   }
 }

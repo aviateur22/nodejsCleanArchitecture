@@ -1,6 +1,7 @@
 import { TodoEntity } from '../../../domain/entities/todo/TodoEntity';
 import { UseCaseServiceImpl } from '../../../domain/services/UseCaseServiceImpl';
 import { AddTodoUseCase } from '../../../domain/useCases/AddToDoUseCase';
+import { CheckToggleTodoUseCase } from '../../../domain/useCases/CheckToggleTodoUseCase';
 import { DeleteOneTodoUseCase } from '../../../domain/useCases/DeleteOneTodoUseCase';
 import { FindAllToDoUseCase } from '../../../domain/useCases/FindAllToDoUseCase';
 import { FindOneTodoUseCase } from '../../../domain/useCases/FindOneTodoUseCase';
@@ -137,5 +138,31 @@ export class TodoDataAccess {
     const deleteOneTodoUseCase: DeleteOneTodoUseCase = UseCaseServiceImpl.getUseCases().deleteOneTodoUseCase;   
     const deleteTodo: TodoEntity = await deleteOneTodoUseCase.execute(todo);
     return deleteTodo;
+  }
+
+  /**
+   * Check Toggle une Todo
+   * @param { string } id 
+   * @param { boolean } status 
+   */
+  static async checkToggleOneTodo(id: string, status: boolean): Promise<TodoEntity> {
+    if(typeof id === 'undefined') {
+      throw new ValidationException('id is mandatory');
+    }
+
+    if(typeof status === 'undefined') {
+      throw new ValidationException('status is mandatory')
+    }
+
+    // Todo a mettre a jour
+    const todo: CheckToggleTodoSchema = {
+      id,
+      status
+    }
+
+    // UseCase
+    const dcheckToggleOneTodoUseCase: CheckToggleTodoUseCase = UseCaseServiceImpl.getUseCases().CheckToggleTodoUseCase;   
+    const checkTodo: TodoEntity = await dcheckToggleOneTodoUseCase.execute(todo);
+    return checkTodo;
   }
 }

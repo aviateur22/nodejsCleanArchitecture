@@ -18,7 +18,8 @@ router.get('/', (req: Request, res: Response)=>{
 // Ajout de 1 Todo
 router.post('/',
   controllerHandler(bodyValidation(validationTodoSchema.addTodoSchema)),
-  controllerHandler(todos.addTodo));
+  controllerHandler(todos.addTodo)
+);
 
 // Récupération de tous les todos
 router.get('/find-all-todos',
@@ -38,10 +39,17 @@ router.get('/:id',
   controllerHandler(todos.findOneTodo)
 );
 
-// Suppression de 1 todo
+// Suppression de 1 Todo
 router.delete('/:id',
   controllerHandler(paramValidation(validationTodoSchema.idParamSchema)),
   controllerHandler(todos.delteOneTodo)
+)
+
+// Check Toggle 1 Todo
+router.patch('/toggle-check/:id',
+  controllerHandler(paramValidation(validationTodoSchema.idParamSchema)),
+  controllerHandler(bodyValidation(validationTodoSchema.checkToggleTodoSchema)),
+  controllerHandler(todos.checkToggleOneTodo)
 )
 
 export default router;

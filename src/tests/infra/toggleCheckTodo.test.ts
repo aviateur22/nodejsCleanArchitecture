@@ -23,11 +23,15 @@ describe('ToggleCheck Todo', ()=>{
     .send({
       status: true
     });
-       
+    
+    // Récupération des Todos
+    const todos = await UseCaseServiceImpl.getUseCases().findAllToDoUseCase.execute();
+    
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty('todo');
     expect(res.body.todo.id).toBe('1');
     expect(res.body.todo.status).toBeTruthy();
+    expect(todos[0].status).toBeTruthy();
   });
 
   // Success unCheck Todo
@@ -38,10 +42,14 @@ describe('ToggleCheck Todo', ()=>{
       status: false
     });
        
+    // Récupération des Todos
+    const todos = await UseCaseServiceImpl.getUseCases().findAllToDoUseCase.execute();
+
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty('todo');
     expect(res.body.todo.id).toBe('1');
     expect(res.body.todo.status).toBeFalsy();
+    expect(todos[0].status).toBeFalsy();   
   });
 
   // Recherhche Todo qui n'existe pas
