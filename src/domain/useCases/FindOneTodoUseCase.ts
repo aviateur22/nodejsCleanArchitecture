@@ -1,5 +1,4 @@
 import { TodoNotFindException } from "../../exceptions/TodoNotFindException";
-import { RepositoryServiceImpl } from "../../infra/services/repository/RepositoryServiceImpl";
 import { TodoEntityMapper } from "../dtos/TodoMapper";
 import { TodoEntity } from "../entities/todo/TodoEntity";
 import { TodoUseCase } from "./TodoUseCase";
@@ -18,7 +17,7 @@ class FindOneTodoUseCase extends TodoUseCase {
     const findTodo = await this.repositories.findOne(todo);
 
     if(!findTodo) {
-      throw new TodoNotFindException();
+      throw new TodoNotFindException('todo not find');
     }
 
     return TodoEntityMapper.getTodoEntity(findTodo);

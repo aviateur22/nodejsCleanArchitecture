@@ -1,7 +1,4 @@
-import { InvalidTodoDescriptionException } from "../../../exceptions/InvalidTodoDescriptionException";
-import { InvalidTodoIdentityException } from "../../../exceptions/InvalidTodoIdentityException";
-import { InvalidTodoStatusException } from "../../../exceptions/InvalidTodoStatusException";
-import { InvalidTodoTitleException } from "../../../exceptions/InvalidTodoTitleException";
+import { ValidationException } from "../../../exceptions/ValidationException";
 
 class TodoPropertyValidation<T> {
 
@@ -51,7 +48,7 @@ class TodoPropertyValidation<T> {
    */
   identityPropertyValidation(id: string): void {
     if(id.trim().length < 1 ) {
-      throw new InvalidTodoIdentityException();
+      throw new ValidationException('error on todo identification');
     }
   }
 
@@ -61,7 +58,7 @@ class TodoPropertyValidation<T> {
    */
   titlePropertyValidation(title: string): void {
     if(title.trim().length < 3 ) {
-      throw new InvalidTodoTitleException();
+      throw new ValidationException('title is mandatory');
     }
   }
 
@@ -71,7 +68,7 @@ class TodoPropertyValidation<T> {
    */
   descriptionPropertyValidation(description: string): void {
     if(description.trim().length < 0 ) {
-      throw new InvalidTodoDescriptionException();
+      throw new ValidationException('description is mandatory');
     }
   }
 
@@ -81,7 +78,7 @@ class TodoPropertyValidation<T> {
    */
   statusPropertyValidation(status: boolean): void {
     if(status === null) {
-      throw new InvalidTodoStatusException();
+      throw new ValidationException('status is mandatory');
     }
   }
 }

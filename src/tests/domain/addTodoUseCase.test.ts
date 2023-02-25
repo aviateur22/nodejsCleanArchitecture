@@ -1,7 +1,7 @@
 import { AddTodoEntity } from "../../domain/entities/todo/AddTodoEntity";
 import { TodoEntity } from "../../domain/entities/todo/TodoEntity";
 import { UseCaseServiceImpl } from "../../domain/services/UseCaseServiceImpl";
-import { InvalidTodoTitleException } from "../../exceptions/InvalidTodoTitleException";
+import { ValidationException } from "../../exceptions/ValidationException";
 import { SelectServices } from "./utilities/SelectServices";
 import { TodoGenerator } from "./utilities/TodoGenerator";
 
@@ -50,7 +50,7 @@ describe('UseCase: addItem', ()=>{
       expect(todos.length).toBe(0);      
       
     } catch (error) {      
-      expect(error).toBeInstanceOf(InvalidTodoTitleException);
+      expect(error).toBeInstanceOf(ValidationException);
     }    
   });
 

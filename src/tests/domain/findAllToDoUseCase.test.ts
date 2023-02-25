@@ -8,7 +8,7 @@ describe('UseCase: getAllTodos', () => {
   SelectServices.SelectRepositoriesSource();
 
   // Instance GetAllTodoUseCase
-  const getAllToDoUseCase = UseCaseServiceImpl.getUseCases().findAllToDoUseCase;
+  const findAllToDoUseCase = UseCaseServiceImpl.getUseCases().findAllToDoUseCase;
 
   // Reset de la base de données
   beforeEach(async()=>{
@@ -22,7 +22,7 @@ describe('UseCase: getAllTodos', () => {
   it('Should find 2 todos', async() => {
     try {      
       // Recupération des Todos
-      const todos = await getAllToDoUseCase.execute();
+      const todos = await findAllToDoUseCase.execute();
 
       expect(todos.length).toBe(2);
       expect(todos[0]).toBeInstanceOf(TodoEntity);
@@ -38,7 +38,7 @@ describe('UseCase: getAllTodos', () => {
       await TodoGenerator.ClearAllTodos();
 
       // Recupération des Todos
-      const todos = await getAllToDoUseCase.execute();
+      const todos = await findAllToDoUseCase.execute();
 
       expect(todos.length).toBe(0);
     } catch (error) {
