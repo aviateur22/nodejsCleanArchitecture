@@ -2,7 +2,7 @@ import express, { NextFunction, Request, Response } from "express";
 import { ErrorTestException } from "../../../../../../../exceptions/ErrorTestException";
 import multer from 'multer';
 import controllerHandler from "../../helpers/controllerHandler";
-import validation from '../../middlewares/validations';
+import validation from '../../middlewares/validations/bodyValidation';
 import schemaTest from '../../middlewares/validations/schemas/schemaTest'
 
 const router = express.Router();

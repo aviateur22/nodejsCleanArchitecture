@@ -1,15 +1,6 @@
 import Joi from 'joi';
 
 export default Joi.object({
-    id: Joi
-    .string()
-    .required()
-    .messages({
-        'string.empty': 'id is mandatory',
-        'string.pattern.base': 'id bad format',
-        'any.required': 'id is mandatory'
-    }),
-
     // Titre     
     title:Joi
       .string()      

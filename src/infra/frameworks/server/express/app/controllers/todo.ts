@@ -43,13 +43,52 @@ export default {
    * @param { NextFunction } next 
    */
   updateTodo: async(req: Request, res: Response, next: NextFunction)=>{
-    
-    const { id, title, description, status } = req.body;
+    // Id de la Todo
+    const id = req.params.id;
+
+    // Contenu de la Todo
+    const { title, description, status } = req.body;
+
 
     // Mise a jour de la Todo
     const todo = await TodoDataAccess.updateTodo(id, title, description, status);
 
     res.status(200).json({
+      todo
+    })
+  },
+
+  /**
+   * Recherche d'une Todo
+   * @param { Request } req 
+   * @param { Response } res 
+   * @param { NextFunction } next 
+   */
+  findOneTodo: async(req: Request, res: Response, next: NextFunction)=>{
+    // Id de la Todo
+    const id: string = req.params.id;
+
+    const todo = await TodoDataAccess.findOneTodo(id);
+
+    res.json({
+      todo
+    })
+  },
+
+  /**
+   * Suppression d'une Todo
+   * @param { Request } req 
+   * @param { Response } res 
+   * @param { NextFunction } next 
+   */
+  delteOneTodo: async(req: Request, res: Response, next: NextFunction)=>{
+    // Id de la Todo
+    const id: string = req.params.id;
+
+    // Suppression
+    const todo = await TodoDataAccess.deleteOneTodo(id);
+    
+    res.json({
       todo
     })
   }

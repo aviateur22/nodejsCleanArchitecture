@@ -1,9 +1,8 @@
 import { ServerSource } from "../../infra/helpers/server/ServerSource";
 import { ServerServiceImpl } from "../../infra/services/server/ServerServiceImpl";
 import request from 'supertest';
-import { SelectServices } from "../domain/utilities/SelectServices";
-import { TodoGenerator } from "../domain/utilities/TodoGenerator";
 import { UseCaseServiceImpl } from "../../domain/services/UseCaseServiceImpl";
+import { BeforeTest } from "./utilities/BeforeTest";
 
 
 describe('AddTodo',()=>{
@@ -16,17 +15,7 @@ describe('AddTodo',()=>{
   const path: string = '/api/v1/todo';
 
   beforeEach(async()=>{
-    // Selection logger
-    SelectServices.selectLoggerSource();
-
-    // Repositories
-    SelectServices.SelectRepositoriesSource();
-
-    // Clear tous les todos
-    await TodoGenerator.ClearAllTodos();
-
-    // Add 2 todos
-    await TodoGenerator.CreateTodos();
+    await BeforeTest.resetParameter();
   });
 
 

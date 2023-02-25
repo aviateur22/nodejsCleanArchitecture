@@ -1,7 +1,8 @@
 import express, { Request, Response } from "express";
 import todos from "../../controllers/todo";
 import controllerHandler from "../../helpers/controllerHandler";
-import validation from '../../middlewares/validations';
+import bodyValidation from '../../middlewares/validations/bodyValidation';
+import paramValidation from '../../middlewares/validations/paramValidation';
 import validationTodoSchema from '../../middlewares/validations/schemas'
 
 const router = express.Router();
@@ -12,21 +13,35 @@ router.get('/', (req: Request, res: Response)=>{
   res.json({
     message: 'Bienvenue sur l\'API des Todos'
   })
-})
+});
 
 // Ajout de 1 Todo
 router.post('/',
-  controllerHandler(validation(validationTodoSchema.addTodoSchema)),
+  controllerHandler(bodyValidation(validationTodoSchema.addTodoSchema)),
   controllerHandler(todos.addTodo));
-
-// Update d'une Todo
-router.patch('/',
-controllerHandler(validation(validationTodoSchema.updateTodoSchema)),
-controllerHandler(todos.updateTodo))
 
 // Récupération de tous les todos
 router.get('/find-all-todos',
   controllerHandler(todos.findAllTodos)
+)
+
+// Update d'une Todo
+router.patch('/:id',
+  controllerHandler(paramValidation(validationTodoSchema.idParamSchema)),
+  controllerHandler(bodyValidation(validationTodoSchema.updateTodoSchema)),
+  controllerHandler(todos.updateTodo)
+);
+
+// Recherche de 1 Todo
+router.get('/:id', 
+  controllerHandler(paramValidation(validationTodoSchema.idParamSchema)),
+  controllerHandler(todos.findOneTodo)
+);
+
+// Suppression de 1 todo
+router.delete('/:id',
+  controllerHandler(paramValidation(validationTodoSchema.idParamSchema)),
+  controllerHandler(todos.delteOneTodo)
 )
 
 export default router;

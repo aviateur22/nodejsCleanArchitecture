@@ -2,35 +2,23 @@ import request from "supertest";
 import { UseCaseServiceImpl } from "../../domain/services/UseCaseServiceImpl";
 import { ServerSource } from "../../infra/helpers/server/ServerSource";
 import { ServerServiceImpl } from "../../infra/services/server/ServerServiceImpl";
-import { SelectServices } from "../domain/utilities/SelectServices";
-import { TodoGenerator } from "../domain/utilities/TodoGenerator";
+import { BeforeTest } from "./utilities/BeforeTest";
 describe('UpdateTodo', ()=>{
 
   // Server
   const app = ServerServiceImpl.setServer(ServerSource.express);
 
-  const path = '/api/v1/todo'
+  let path = '/api/v1/todo/2'
 
   beforeEach(async()=>{
-    // Selection logger
-    SelectServices.selectLoggerSource();
-
-    // Repositories
-    SelectServices.SelectRepositoriesSource();
-
-    // Clear tous les todos
-    await TodoGenerator.ClearAllTodos();
-
-    // Add 2 todos
-    await TodoGenerator.CreateTodos();
+    await BeforeTest.resetParameter();
   })
  
   // Update Todo
   it('should update a Todo', async()=>{
     const res = await request(app)
     .patch(path)    
-    .send({
-      id: '2',
+    .send({     
       title: 'mon titre mis a jour',
       description: 'ma description mis a jour',
       status: true
@@ -49,11 +37,11 @@ describe('UpdateTodo', ()=>{
     expect(todos[1].title).toBe('mon titre mis a jour');
   });
 
+  // Mise a jour todo avec description vide
   it('Should update a Todo with an empty description', async()=>{
     const res = await request(app)
     .patch(path)    
     .send({
-      id: '2',
       title: 'mon titre mis a jour',
       description: '',
       status: true
@@ -75,10 +63,10 @@ describe('UpdateTodo', ()=>{
 
   // Todo absente d ela base de données
   it('Should throw TodoNotfindException because Todo does not exist', async()=>{
+    path = '/api/v1/todo/5'
     const res = await request(app)
     .patch(path)    
     .send({
-      id: '3',
       title: 'mon titre mis a jour',
       description: 'ma description mis a jour',
       status: true
@@ -93,7 +81,6 @@ describe('UpdateTodo', ()=>{
     const res = await request(app)
     .patch(path)    
     .send({
-      id: '2',
       title: '',
       description: 'ma nouvelle description',
       status: true
@@ -108,8 +95,7 @@ describe('UpdateTodo', ()=>{
   it('Should throw ValidationException because status is missing', async()=>{
     const res = await request(app)
     .patch(path)    
-    .send({
-      id: '2',
+    .send({     
       title: 'mon noveau titre',
       description: 'ma nouvelle description',      
     });

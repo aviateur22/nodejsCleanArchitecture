@@ -1,7 +1,9 @@
 import { TodoEntity } from '../../../domain/entities/todo/TodoEntity';
 import { UseCaseServiceImpl } from '../../../domain/services/UseCaseServiceImpl';
 import { AddTodoUseCase } from '../../../domain/useCases/AddToDoUseCase';
+import { DeleteOneTodoUseCase } from '../../../domain/useCases/DeleteOneTodoUseCase';
 import { FindAllToDoUseCase } from '../../../domain/useCases/FindAllToDoUseCase';
+import { FindOneTodoUseCase } from '../../../domain/useCases/FindOneTodoUseCase';
 import { UpdateTodoUseCase } from '../../../domain/useCases/UpdateToDoUseCase';
 import { ValidationException } from '../../../exceptions/ValidationException';
 
@@ -94,5 +96,46 @@ export class TodoDataAccess {
     const updateTodoUseCase: UpdateTodoUseCase = UseCaseServiceImpl.getUseCases().updateTodoUseCase;   
     const updateTodo: TodoEntity = await updateTodoUseCase.execute(todo);
     return updateTodo;
+  }
+
+  /**
+   * Recherche de une Todo
+   * @param { string } id
+   * @returns { TodoEntity }
+   */
+  static async findOneTodo(id: string): Promise<TodoEntity> {
+
+    if(typeof id === 'undefined') {
+      throw new ValidationException('id is mandatory');
+    }
+
+    const todo: FindOneTodoSchema = {
+      id
+    };
+
+    // UseCase
+    const findOneTodoUseCase: FindOneTodoUseCase = UseCaseServiceImpl.getUseCases().findOneTodoUseCase;   
+    const findTodo: TodoEntity = await findOneTodoUseCase.execute(todo);
+    return findTodo;
+  }
+
+  /**
+   * Supprssion de une Todo
+   * @param { string } id 
+   * @returns { TodoEntity }
+   */
+  static async deleteOneTodo(id: string): Promise<TodoEntity> {
+    if(typeof id === 'undefined') {
+      throw new ValidationException('id is mandatory');
+    }
+
+    const todo: DeleteTodoSchema = {
+      id
+    };
+
+    // UseCase
+    const deleteOneTodoUseCase: DeleteOneTodoUseCase = UseCaseServiceImpl.getUseCases().deleteOneTodoUseCase;   
+    const deleteTodo: TodoEntity = await deleteOneTodoUseCase.execute(todo);
+    return deleteTodo;
   }
 }
