@@ -1,9 +1,14 @@
 import express from "express";
+import cors from 'cors';
 import router from './routers';
 import error from './middlewares/error';
 import notFound from './middlewares/notfound';
+import corsOptions from "../../../../helpers/cors/corsOptions";
+
 
 const app = express();
+// Cors
+app.use(cors(corsOptions()));
 
 //Permet de gerer les formulaire (pas les formData)
 app.use(express.urlencoded({ extended: true }));
