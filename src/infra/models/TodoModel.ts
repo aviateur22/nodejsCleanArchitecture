@@ -1,5 +1,5 @@
 /**
- * Model Item isuue de la base de données 
+ * Model Item issue de la base de données 
  */
 class TodoModel {
 
