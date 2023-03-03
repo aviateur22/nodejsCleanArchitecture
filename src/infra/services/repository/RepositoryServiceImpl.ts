@@ -1,25 +1,41 @@
+import { RepositoryException } from "../../../exceptions/RepositoryException";
 import { Repositories } from "../../helpers/repositories/Repositories";
 import { RepositoriesSelection } from "../../helpers/repositories/RepositoriesSelection";
-import { RepositorySources } from "../../helpers/repositories/RepositorySources";
 
 /**
  * Implementation de la base de données
  */
 class RepositoryServiceImpl {
-  static repositories: Repositories;
+  
+  /**
+   * Repositories actif pour le projet
+   */
+  private static repositories: Repositories;
 
   /**
-   * Renvoies la base de données selectionnée
+   * Selection repositories
+   * @returns { void }
+   */
+  static setRepositories(selectRepositorySource: number): void {
+    
+    if(typeof RepositoryServiceImpl.repositories === 'undefined') {
+      const repositoriesSelection = new RepositoriesSelection();
+      RepositoryServiceImpl.repositories = repositoriesSelection.getRepositories(selectRepositorySource);
+    }
+  }
+
+  /**
+   * Récupération du repository
    * @returns { Repositories }
    */
-  getRepositories(): Repositories {
+  static getRepository(): Repositories {
 
-    if(!RepositoryServiceImpl.repositories) {
-      const repositoriesSelection = new RepositoriesSelection();
-      RepositoryServiceImpl.repositories = repositoriesSelection.getRepositories(RepositorySources.inMemory);
+    // Repository non défini
+    if(typeof RepositoryServiceImpl.repositories === 'undefined') {      
+      throw new RepositoryException('no repository selected');     
     }
+    return RepositoryServiceImpl.repositories
 
-    return RepositoryServiceImpl.repositories;
   }
 }
 

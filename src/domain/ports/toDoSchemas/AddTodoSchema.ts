@@ -4,4 +4,5 @@
 interface AddTodoSchema {
   title: string;
   description: string;
+  status: boolean;
 }

@@ -1,13 +1,13 @@
-import { ToDoRepositorySchema } from "../../../domains/ports/repositoriesSchemas/ToDoRepositorySchema"
+import { TodoRepositorySchema } from "../../../domain/ports/repositoriesSchemas/TodoRepositorySchema"
 
 /**
  * Regroupement des repositories
  */
 class Repositories {
-  public readonly itemRepository: ToDoRepositorySchema;
+  public readonly todoRepository: TodoRepositorySchema;
 
-  constructor(itemRepository: ToDoRepositorySchema) {
-    this.itemRepository = itemRepository;
+  constructor(todoRepository: TodoRepositorySchema) {
+    this.todoRepository = todoRepository;
   }
 }
 export { Repositories }

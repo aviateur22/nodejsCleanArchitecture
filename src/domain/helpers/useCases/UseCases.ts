@@ -1,26 +1,30 @@
-import { AddToDoUseCase } from "../../useCases/AddToDoUseCase"
-import { CheckToDoUseCase } from "../../useCases/CheckToDoUseCase";
-import { GetAllToDoUseCase } from "../../useCases/GetAllToDoUseCase";
-import { GetOneToDoUseCase } from "../../useCases/GetOneToDoUseCase";
-import { UpdateToDoUseCase } from "../../useCases/UpdateToDoUseCase";
+import { AddTodoUseCase } from "../../useCases/AddToDoUseCase"
+import { CheckToggleTodoUseCase } from "../../useCases/CheckToggleTodoUseCase";
+import { DeleteOneTodoUseCase } from "../../useCases/DeleteOneTodoUseCase";
+import { FindAllToDoUseCase } from "../../useCases/FindAllToDoUseCase";
+import { FindOneTodoUseCase } from "../../useCases/FindOneTodoUseCase";
+import { UpdateTodoUseCase } from "../../useCases/UpdateToDoUseCase";
 
 /**
- * UseCases de disponible dans le domaine
+ * UseCases disponibles dans le domaine
  */
 class UseCases {
 
-  protected readonly addToDoUseCase: AddToDoUseCase;
-  protected readonly checkToDoUseCase: CheckToDoUseCase;
-  protected readonly updateToDoUseCase: UpdateToDoUseCase;
-  protected readonly getAllToDoUseCase: GetAllToDoUseCase;
-  protected readonly getOneToDoUseCase: GetOneToDoUseCase;
+  
+  readonly addTodoUseCase: AddTodoUseCase;
+  readonly CheckToggleTodoUseCase: CheckToggleTodoUseCase;
+  readonly updateTodoUseCase: UpdateTodoUseCase;
+  readonly findAllToDoUseCase: FindAllToDoUseCase;
+  readonly findOneTodoUseCase: FindOneTodoUseCase;
+  readonly deleteOneTodoUseCase: DeleteOneTodoUseCase
 
   constructor() {
-    this.addToDoUseCase = new AddToDoUseCase();
-    this.checkToDoUseCase = new CheckToDoUseCase();
-    this.updateToDoUseCase = new UpdateToDoUseCase();
-    this.getOneToDoUseCase = new GetOneToDoUseCase();
-    this.getAllToDoUseCase = new GetAllToDoUseCase();
+    this.addTodoUseCase = new AddTodoUseCase(this);
+    this.CheckToggleTodoUseCase = new CheckToggleTodoUseCase(this);
+    this.updateTodoUseCase = new UpdateTodoUseCase(this);
+    this.findOneTodoUseCase = new FindOneTodoUseCase(this);
+    this.findAllToDoUseCase = new FindAllToDoUseCase(this);
+    this.deleteOneTodoUseCase = new DeleteOneTodoUseCase(this);
   }
 
 }
