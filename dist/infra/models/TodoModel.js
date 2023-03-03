@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TodoModel = void 0;
 /**
- * Model Item isuue de la base de données
+ * Model Item issue de la base de données
  */
 class TodoModel {
     constructor(id, title, description, status, createdAt, updatedAt) {

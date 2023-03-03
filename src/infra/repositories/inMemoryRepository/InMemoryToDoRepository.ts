@@ -98,10 +98,9 @@ class InMemoryToDoRepository implements TodoRepositorySchema {
    * @returns {Array<TodoModel>}
    */
   async findAll(): Promise<Array<TodoModel>> {
-
     // Tris des todo du plus recent au plus ancien
-    this.todos.sort((a, b) => (a.createdAt < b.createdAt ? -1 : 1));
-
+    this.todos.sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1));
+    
     return this.todos;
   }
 
