@@ -42,10 +42,17 @@ class InMemoryToDoRepository implements TodoRepositorySchema {
     // Index
     const index: number = Number(todoSchema.id);
 
+    // Recherche Todo
+    const findTodo = await this.todos.find(todo => (todoSchema.id === todo.id));
+
+    if(!findTodo) {
+      throw new TodoNotFindException('todo not find');
+    }
+
     // Modification des propriété
-    this.todos[index - 1].title = todoSchema.title;
-    this.todos[index - 1].description = todoSchema.description;  
-    this.todos[index - 1].updatedAt = new Date();
+    findTodo.title = todoSchema.title;
+    findTodo.description = todoSchema.description;  
+    findTodo.updatedAt = new Date();
 
     const updateTodo = await this.findOne(todoSchema);
 
@@ -62,15 +69,28 @@ class InMemoryToDoRepository implements TodoRepositorySchema {
    * @param todoSchema 
    * @returns 
    */
-  async checkToggleItem(todoSchema: CheckToggleTodoSchema): Promise<TodoModel> {
+  async checkToggleItem(todoSchema: CheckToggleTodoSchema): Promise<TodoModel> {  
     // Index
     const index: number = Number(todoSchema.id);
+    
+
+    const findTodo = await this.todos.find(todo => (todoSchema.id === todo.id));
+  
+    if(!findTodo) {
+      throw new TodoNotFindException('todo not find');
+    }
 
     // Modification des propriété
-    this.todos[index - 1].status = todoSchema.status;
-    this.todos[index - 1].updatedAt = new Date();
+    findTodo.status = todoSchema.status;
+    findTodo.updatedAt = new Date();
     
-    return this.todos[index - 1];
+    const updateTodo = await this.findOne(todoSchema);
+   
+    if(!updateTodo) {
+      throw new TodoNotFindException('todo not find');
+    }
+    
+    return updateTodo;
   }
 
   /**

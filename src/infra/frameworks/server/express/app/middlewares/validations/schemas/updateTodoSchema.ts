@@ -1,15 +1,19 @@
 import Joi from 'joi';
 
 export default Joi.object({
+    // Id
+    id: Joi
+    .any(),
+
     // Titre     
     title:Joi
-      .string()      
-      .required()
-      .messages({
+    .string()      
+    .required()
+    .messages({
         'string.empty': 'title is mandatory',
         'string.pattern.base': 'incorrect title format',
         'any.required': 'title is mandatory'
-        }),
+    }),
 
     // Description
     description: Joi

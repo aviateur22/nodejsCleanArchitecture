@@ -106,8 +106,6 @@ export default {
     // Status
     const { status } = req.body;
 
-    console.log('ici')
-
     // CheckToggle
     const todo = await TodoDataAccess.checkToggleOneTodo(id, status);
 
