@@ -6,7 +6,7 @@
 /sqitch.conf
 
 # Dossier javascript
-/dist
+# /dist
 
 # Logger
 /src/log/
