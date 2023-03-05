@@ -6,6 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const todo_1 = __importDefault(require("./todo"));
 const router = express_1.default.Router();
-/** router messagerie */
+// router Todos
 router.use('/todo', todo_1.default);
 exports.default = router;
