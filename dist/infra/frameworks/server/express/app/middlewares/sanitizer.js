@@ -15,14 +15,35 @@ exports.default = (req, res, next) => {
     let sanitizeDataQuery = {};
     let sanitizeDataParams = {};
     for (let key in req.query) {
-        let sanitizeString = (_a = req.query[key]) === null || _a === void 0 ? void 0 : _a.toString();
-        sanitizeDataQuery[key] = sanitizeString;
+        let queryDataString = (_a = req.query[key]) === null || _a === void 0 ? void 0 : _a.toString();
+        if (typeof queryDataString === 'undefined') {
+            sanitizeDataQuery[key] = queryDataString;
+        }
+        else {
+            sanitizeDataQuery[key] = sanitizeData(typeof req.query[key], queryDataString);
+        }
     }
     for (let key in req.body) {
-        sanitizeDataBody[key] = (0, xss_1.default)(sanitizer_1.default.escape(req.body[key].trim()));
+        sanitizeDataBody[key] = sanitizeData(typeof req.body[key], req.body[key]);
     }
     for (let key in req.params) {
-        sanitizeDataParams[key] = (0, xss_1.default)(sanitizer_1.default.escape(req.params[key].trim()));
+        sanitizeDataParams[key] = sanitizeData(typeof req.params[key], req.params[key]);
+    }
+    /**
+     * Traitement des données
+     * @param {string} dataType
+     * @param {string} dataToSanitize
+     */
+    function sanitizeData(dataType, dataToSanitize) {
+        switch (dataType) {
+            case 'string':
+            case 'number':
+                return (0, xss_1.default)(sanitizer_1.default.escape(dataToSanitize).trim());
+                break;
+            default:
+                return (0, xss_1.default)(sanitizer_1.default.escape(dataToSanitize));
+                break;
+        }
     }
     /** mise à jour des données nettoyés*/
     req.body = sanitizeDataBody;

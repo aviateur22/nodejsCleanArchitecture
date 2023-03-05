@@ -54,3 +54,24 @@
 {"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":18324,"level":50,"msg":"title is mandatory","time":"2023-03-03T14:50:17.685Z","v":0}
 {"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":18324,"level":50,"msg":"title is mandatory","time":"2023-03-03T14:50:47.673Z","v":0}
 {"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":18324,"level":50,"msg":"title is mandatory","time":"2023-03-03T14:51:14.038Z","v":0}
+{"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":7752,"level":50,"msg":"\"status\" must be a boolean","time":"2023-03-05T12:36:04.258Z","v":0}
+{"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":7752,"level":50,"msg":"\"status\" must be a boolean","time":"2023-03-05T12:36:08.262Z","v":0}
+{"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":7752,"level":50,"msg":"\"status\" must be a boolean","time":"2023-03-05T12:36:08.773Z","v":0}
+{"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":7752,"level":50,"msg":"\"status\" must be a boolean","time":"2023-03-05T12:36:08.946Z","v":0}
+{"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":7752,"level":50,"msg":"\"status\" must be a boolean","time":"2023-03-05T12:36:09.081Z","v":0}
+{"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":7752,"level":50,"msg":"\"status\" must be a boolean","time":"2023-03-05T12:36:09.214Z","v":0}
+{"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":7752,"level":50,"msg":"\"status\" must be a boolean","time":"2023-03-05T12:36:09.335Z","v":0}
+{"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":7752,"level":50,"msg":"\"status\" must be a boolean","time":"2023-03-05T12:36:11.230Z","v":0}
+{"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":7752,"level":50,"msg":"\"status\" must be a boolean","time":"2023-03-05T12:36:14.823Z","v":0}
+{"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":7752,"level":50,"msg":"\"status\" must be a boolean","time":"2023-03-05T12:36:18.305Z","v":0}
+{"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":7752,"level":50,"msg":"\"status\" must be a boolean","time":"2023-03-05T12:36:26.757Z","v":0}
+{"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":7752,"level":50,"msg":"\"status\" must be a boolean","time":"2023-03-05T12:36:31.788Z","v":0}
+{"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":7752,"level":50,"msg":"\"status\" must be a boolean","time":"2023-03-05T12:36:33.091Z","v":0}
+{"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":15356,"level":50,"msg":"\"status\" must be a boolean","time":"2023-03-05T12:38:03.257Z","v":0}
+{"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":21524,"level":50,"msg":"todo not find","time":"2023-03-05T12:41:51.286Z","v":0}
+{"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":21524,"level":50,"msg":"\"status\" must be a boolean","time":"2023-03-05T12:43:00.227Z","v":0}
+{"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":21524,"level":50,"msg":"\"status\" must be a boolean","time":"2023-03-05T12:43:31.558Z","v":0}
+{"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":21524,"level":50,"msg":"\"status\" must be a boolean","time":"2023-03-05T12:43:44.082Z","v":0}
+{"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":21524,"level":50,"msg":"\"status\" must be a boolean","time":"2023-03-05T12:44:51.144Z","v":0}
+{"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":21524,"level":50,"msg":"\"status\" must be a boolean","time":"2023-03-05T12:45:25.579Z","v":0}
+{"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":21524,"level":50,"msg":"\"status\" must be a boolean","time":"2023-03-05T12:45:29.232Z","v":0}

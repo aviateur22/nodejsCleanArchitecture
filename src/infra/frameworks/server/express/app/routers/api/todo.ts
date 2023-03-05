@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import todos from "../../controllers/todo";
 import controllerHandler from "../../helpers/controllerHandler";
+import sanitizer from "../../middlewares/sanitizer";
 import bodyValidation from '../../middlewares/validations/bodyValidation';
 import paramValidation from '../../middlewares/validations/paramValidation';
 import validationTodoSchema from '../../middlewares/validations/schemas'
@@ -16,8 +17,9 @@ router.get('/', (req: Request, res: Response)=>{
 });
 
 // Ajout de 1 Todo
-router.post('/',
+router.post('/',  
   controllerHandler(bodyValidation(validationTodoSchema.addTodoSchema)),
+  controllerHandler(sanitizer),
   controllerHandler(todos.addTodo)
 );
 
@@ -27,9 +29,10 @@ router.get('/find-all-todos',
 )
 
 // Update d'une Todo
-router.patch('/:id',
+router.patch('/:id',  
   controllerHandler(paramValidation(validationTodoSchema.idParamSchema)),
-  controllerHandler(bodyValidation(validationTodoSchema.updateTodoSchema)),
+  controllerHandler(bodyValidation(validationTodoSchema.updateTodoSchema)),  
+  controllerHandler(sanitizer),
   controllerHandler(todos.updateTodo)
 );
 
@@ -49,6 +52,7 @@ router.delete('/:id',
 router.patch('/toggle-check/:id',
   controllerHandler(paramValidation(validationTodoSchema.idParamSchema)),
   controllerHandler(bodyValidation(validationTodoSchema.checkToggleTodoSchema)),
+  controllerHandler(sanitizer),
   controllerHandler(todos.checkToggleOneTodo)
 )
 

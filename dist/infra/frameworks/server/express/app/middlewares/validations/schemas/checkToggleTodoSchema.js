@@ -9,11 +9,5 @@ exports.default = joi_1.default.object({
     id: joi_1.default
         .any(),
     status: joi_1.default
-        .boolean()
-        .required()
-        .messages({
-        'string.empty': 'status is mandatory',
-        'string.pattern.base': 'incorrect status format',
-        'any.required': 'status is mandatory'
-    })
+        .any()
 });
