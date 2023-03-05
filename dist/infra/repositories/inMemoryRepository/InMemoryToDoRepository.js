@@ -87,6 +87,8 @@ class InMemoryToDoRepository {
      */
     findAll() {
         return __awaiter(this, void 0, void 0, function* () {
+            // Tris des todo du plus recent au plus ancien
+            this.todos.sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1));
             return this.todos;
         });
     }

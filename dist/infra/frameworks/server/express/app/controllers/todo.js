@@ -49,6 +49,9 @@ exports.default = {
         const id = req.params.id;
         // Contenu de la Todo
         const { title, description, status } = req.body;
+        console.log(status);
+        console.log('ici');
+        console.log(status);
         // Mise a jour de la Todo
         const todo = yield TodoDataAccess_1.TodoDataAccess.updateTodo(id, title, description, status);
         res.status(200).json({
