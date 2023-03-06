@@ -16,7 +16,7 @@ const app = ServerServiceImpl.setServer(ServerSource.express);
 LoggerServiceImpl.setLogger(LoggerSource.bunyan);
 
 // Initilisation repositories
-RepositoryServiceImpl.setRepositories(RepositorySources.inMemory);
+RepositoryServiceImpl.setRepositories(RepositorySources.postgreSQL);
 
 // Port
 const PORT = process.env.PORT ?? 3000;

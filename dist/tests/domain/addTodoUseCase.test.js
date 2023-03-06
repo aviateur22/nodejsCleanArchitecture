@@ -13,27 +13,27 @@ const AddTodoEntity_1 = require("../../domain/entities/todo/AddTodoEntity");
 const TodoEntity_1 = require("../../domain/entities/todo/TodoEntity");
 const UseCaseServiceImpl_1 = require("../../domain/services/UseCaseServiceImpl");
 const ValidationException_1 = require("../../exceptions/ValidationException");
-const SelectServices_1 = require("./utilities/SelectServices");
-const TodoGenerator_1 = require("./utilities/TodoGenerator");
+const TestUtilities_1 = require("../utilities/TestUtilities");
+const TodoGenerator_1 = require("../utilities/TodoGenerator");
+// Selection Server Express
+const testUtilities = new TestUtilities_1.TestUtilities();
+// Selection des services pour les tests
+testUtilities.selectService();
 describe('UseCase: addItem', () => {
-    //Selection du repository
-    SelectServices_1.SelectServices.SelectRepositoriesSource();
-    // Instance GetAllTodoUseCase
-    const addTodoUseCase = UseCaseServiceImpl_1.UseCaseServiceImpl.getUseCases().addTodoUseCase;
     beforeEach(() => __awaiter(void 0, void 0, void 0, function* () {
-        // Clear tous les todos
-        yield TodoGenerator_1.TodoGenerator.ClearAllTodos();
+        yield testUtilities.resetParam();
     }));
     // Ajout d'un todo avec un titre et une description
     it('Should add one todo', () => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const addTodo = yield addTodoUseCase.execute({
+            const addTodo = yield UseCaseServiceImpl_1.UseCaseServiceImpl.getUseCases().addTodoUseCase.execute({
                 title: 'Mon Titre',
                 description: 'Ma description',
                 status: false
             });
+            console.log('ici');
             const todos = yield TodoGenerator_1.TodoGenerator.findAllTodos();
-            expect(todos.length).toBe(1);
+            expect(todos.length).toBe(3);
             expect(todos[0].description).toBe('Ma description');
             expect(todos[0].title).toBe('Mon Titre');
         }
@@ -46,7 +46,7 @@ describe('UseCase: addItem', () => {
         try {
             const addTodoEntity = new AddTodoEntity_1.AddTodoEntity('', 'Ma description');
             // Ajout de la todo
-            yield addTodoUseCase.execute(addTodoEntity);
+            yield yield UseCaseServiceImpl_1.UseCaseServiceImpl.getUseCases().addTodoUseCase.execute(addTodoEntity);
             const todos = yield TodoGenerator_1.TodoGenerator.findAllTodos();
             expect(todos.length).toBe(0);
         }
@@ -59,13 +59,13 @@ describe('UseCase: addItem', () => {
         try {
             const addTodoEntity = new AddTodoEntity_1.AddTodoEntity('Mon titre', '');
             // Ajout de la todo
-            const addTodo = yield addTodoUseCase.execute(addTodoEntity);
+            const addTodo = yield yield UseCaseServiceImpl_1.UseCaseServiceImpl.getUseCases().addTodoUseCase.execute(addTodoEntity);
             const todos = yield TodoGenerator_1.TodoGenerator.findAllTodos();
             expect(todos[0]).toBeInstanceOf(TodoEntity_1.TodoEntity);
-            expect(todos[0].id).toBe("1");
+            expect(todos[0].id.toString()).toBe("3");
             expect(addTodo.title).toBe("Mon titre");
             expect(addTodo.description).toBe("");
-            expect(todos.length).toBe(1);
+            expect(todos.length).toBe(3);
         }
         catch (error) {
             expect(error).toBeFalsy();

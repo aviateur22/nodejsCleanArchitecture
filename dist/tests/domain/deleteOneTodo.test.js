@@ -12,31 +12,28 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const DeleteTodoEntity_1 = require("../../domain/entities/todo/DeleteTodoEntity");
 const UseCaseServiceImpl_1 = require("../../domain/services/UseCaseServiceImpl");
 const TodoNotFindException_1 = require("../../exceptions/TodoNotFindException");
-const SelectServices_1 = require("./utilities/SelectServices");
-const TodoGenerator_1 = require("./utilities/TodoGenerator");
+const TestUtilities_1 = require("../utilities/TestUtilities");
+// Selection Server Express
+const testUtilities = new TestUtilities_1.TestUtilities();
+// Selection des services pour les tests
+testUtilities.selectService();
 describe('DeleteOneTodo useCase', () => {
-    //Selection du repository
-    SelectServices_1.SelectServices.SelectRepositoriesSource();
-    // delete useCase
-    const deleteTodoUseCase = UseCaseServiceImpl_1.UseCaseServiceImpl.getUseCases().deleteOneTodoUseCase;
-    // findAll useCase
-    const findAllTodoUseCase = UseCaseServiceImpl_1.UseCaseServiceImpl.getUseCases().findAllToDoUseCase;
-    beforeEach(() => {
-        // Suppression des Todos
-        TodoGenerator_1.TodoGenerator.ClearAllTodos();
-        // Ajout de 2 Todos
-        TodoGenerator_1.TodoGenerator.CreateTodos();
-    });
+    beforeEach(() => __awaiter(void 0, void 0, void 0, function* () {
+        yield testUtilities.resetParam();
+    }));
+    afterEach(() => __awaiter(void 0, void 0, void 0, function* () {
+        yield testUtilities.resetParam();
+    }));
     // Suppression de une Todo
     it('Should delete one Todo', () => __awaiter(void 0, void 0, void 0, function* () {
         try {
             // Todo a supprimé
             const deleteTodo = new DeleteTodoEntity_1.DeleteTodoEntity('1');
             // Suppression d'une Todo
-            const todo = yield deleteTodoUseCase.execute(deleteTodo);
+            const todo = yield UseCaseServiceImpl_1.UseCaseServiceImpl.getUseCases().deleteOneTodoUseCase.execute(deleteTodo);
             // Récupération des todos
-            const todos = yield findAllTodoUseCase.execute();
-            expect(todo.id).toBe("1");
+            const todos = yield UseCaseServiceImpl_1.UseCaseServiceImpl.getUseCases().findAllToDoUseCase.execute();
+            expect(todo.id.toString()).toBe("1");
             expect(todos.length).toBe(1);
         }
         catch (error) {
@@ -49,9 +46,9 @@ describe('DeleteOneTodo useCase', () => {
             // Todo a supprimé
             const deleteTodo = new DeleteTodoEntity_1.DeleteTodoEntity('5');
             // Suppression d'une Todo
-            const todo = yield deleteTodoUseCase.execute(deleteTodo);
+            const todo = yield UseCaseServiceImpl_1.UseCaseServiceImpl.getUseCases().deleteOneTodoUseCase.execute(deleteTodo);
             // Récupération des todos
-            const todos = yield findAllTodoUseCase.execute();
+            const todos = yield UseCaseServiceImpl_1.UseCaseServiceImpl.getUseCases().findAllToDoUseCase.execute();
             expect(todo).toBeFalsy();
             expect(todos.length).toBe(2);
         }

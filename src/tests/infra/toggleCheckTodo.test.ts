@@ -1,19 +1,28 @@
-import { BeforeTest } from "./utilities/BeforeTest";
 import request from 'supertest';
-import { ServerSource } from "../../infra/helpers/server/ServerSource";
-import { ServerServiceImpl } from "../../infra/services/server/ServerServiceImpl";
 import { UseCaseServiceImpl } from "../../domain/services/UseCaseServiceImpl";
+import { TestUtilities } from '../utilities/TestUtilities';
+
+// Selection Server Express
+const testUtilities = new TestUtilities();
+
+// Selection des services pour les tests
+testUtilities.selectService();
 
 // Suppression d'une Todo
 describe('ToggleCheck Todo', ()=>{
-  // Server
-  const app = ServerServiceImpl.setServer(ServerSource.express);
+
+ // Jest app
+ const app = testUtilities.getBackend();
 
   // Path
-  let path = '/api/v1/todo/toggle-check/1'
+  let path = '/api/v1/todo/toggle-check/1';
 
   beforeEach(async()=>{
-    BeforeTest.resetParameter();
+    await testUtilities.resetParam();
+  });
+  
+  afterEach(async()=>{
+    await testUtilities.resetParam();
   });
 
   // Succes check Todo
@@ -25,13 +34,16 @@ describe('ToggleCheck Todo', ()=>{
     });
     
     // Récupération des Todos
-    const todos = await UseCaseServiceImpl.getUseCases().findAllToDoUseCase.execute();
-    
+    const findTodo = await UseCaseServiceImpl.getUseCases().findOneTodoUseCase.execute({
+      id: "1"
+    });
+
+    expect(res.body).toHaveProperty('todo');
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty('todo');
-    expect(res.body.todo.id).toBe('1');
+    expect(res.body.todo.id.toString()).toBe('1');
     expect(res.body.todo.status).toBeTruthy();
-    expect(todos[0].status).toBeTruthy();
+    expect(findTodo.status).toBeTruthy();
   });
 
   // Success unCheck Todo
@@ -43,13 +55,15 @@ describe('ToggleCheck Todo', ()=>{
     });
        
     // Récupération des Todos
-    const todos = await UseCaseServiceImpl.getUseCases().findAllToDoUseCase.execute();
-
+    const findTodo = await UseCaseServiceImpl.getUseCases().findOneTodoUseCase.execute({
+      id: "1"
+    });
+    expect(res.body).toHaveProperty('todo');
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty('todo');
-    expect(res.body.todo.id).toBe('1');
+    expect(res.body.todo.id.toString()).toBe('1');
     expect(res.body.todo.status).toBeFalsy();
-    expect(todos[0].status).toBeFalsy();   
+    expect(findTodo.status).toBeFalsy();   
   });
 
   // Recherhche Todo qui n'existe pas

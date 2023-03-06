@@ -1,21 +1,30 @@
 import request from 'supertest';
-import { ServerServiceImpl } from '../../infra/services/server/ServerServiceImpl';
-import { ServerSource } from '../../infra/helpers/server/ServerSource';
-import { TodoGenerator } from '../domain/utilities/TodoGenerator';
-import { BeforeTest } from './utilities/BeforeTest';
+import { TodoGenerator } from '../utilities/TodoGenerator';
+import { TestUtilities } from '../utilities/TestUtilities';
+
+// Selection Server Express
+const testUtilities = new TestUtilities();
+
+// Selection des services pour les tests
+testUtilities.selectService();
 
 describe('findAlltodos', ()=>{
-  // Selection Server Express
-  const app = ServerServiceImpl.setServer(ServerSource.express);
-
+   // Jest app
+   const app = testUtilities.getBackend();
+   
   // Path
   const path: string = '/api/v1/todo/find-all-todos';
 
-  beforeAll(async()=>{
-    await BeforeTest.resetParameter();
+  beforeEach(async()=>{
+    await testUtilities.resetParam();
   });
 
-  it('Should find all the todos avail', async()=>{    
+  afterEach(async()=>{
+    await testUtilities.resetParam();
+  });
+
+  it('Should find all the todos avail', async()=>{   
+    console.log('test'); 
     const res = await request(app)
     .get(path)
 

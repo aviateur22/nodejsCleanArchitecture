@@ -12,19 +12,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const BeforeTest_1 = require("./utilities/BeforeTest");
 const supertest_1 = __importDefault(require("supertest"));
-const ServerSource_1 = require("../../infra/helpers/server/ServerSource");
-const ServerServiceImpl_1 = require("../../infra/services/server/ServerServiceImpl");
 const UseCaseServiceImpl_1 = require("../../domain/services/UseCaseServiceImpl");
+const TestUtilities_1 = require("../utilities/TestUtilities");
+//import { BeforeTest } from '../utilities/BeforeTest';
+// Selection Server Express
+const testUtilities = new TestUtilities_1.TestUtilities();
+// Selection des services pour les tests
+testUtilities.selectService();
 // Suppression d'une Todo
 describe('DeleteOne Todo', () => {
     // Server
-    const app = ServerServiceImpl_1.ServerServiceImpl.setServer(ServerSource_1.ServerSource.express);
+    const app = testUtilities.getBackend();
     // Path
     let path = '/api/v1/todo/1';
     beforeEach(() => __awaiter(void 0, void 0, void 0, function* () {
-        BeforeTest_1.BeforeTest.resetParameter();
+        yield testUtilities.resetParam();
+    }));
+    afterEach(() => __awaiter(void 0, void 0, void 0, function* () {
+        yield testUtilities.resetParam();
     }));
     // Succes suppression Todo
     it('Should delete one Todo', () => __awaiter(void 0, void 0, void 0, function* () {
@@ -34,7 +40,7 @@ describe('DeleteOne Todo', () => {
         const todos = yield UseCaseServiceImpl_1.UseCaseServiceImpl.getUseCases().findAllToDoUseCase.execute();
         expect(res.statusCode).toBe(200);
         expect(res.body).toHaveProperty('todo');
-        expect(res.body.todo.id).toBe('1');
+        expect(res.body.todo.id.toString()).toBe('1');
         expect(todos.length).toBe(1);
     }));
     // Echec Suppression Todo

@@ -11,24 +11,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const TodoEntity_1 = require("../../domain/entities/todo/TodoEntity");
 const UseCaseServiceImpl_1 = require("../../domain/services/UseCaseServiceImpl");
-const SelectServices_1 = require("./utilities/SelectServices");
-const TodoGenerator_1 = require("./utilities/TodoGenerator");
+const TestUtilities_1 = require("../utilities/TestUtilities");
+const TodoGenerator_1 = require("../utilities/TodoGenerator");
+// Selection Server Express
+const testUtilities = new TestUtilities_1.TestUtilities();
+// Selection des services pour les tests
+testUtilities.selectService();
 describe('UseCase: getAllTodos', () => {
-    //Selection du repository
-    SelectServices_1.SelectServices.SelectRepositoriesSource();
-    // Instance GetAllTodoUseCase
-    const findAllToDoUseCase = UseCaseServiceImpl_1.UseCaseServiceImpl.getUseCases().findAllToDoUseCase;
-    // Reset de la base de données
     beforeEach(() => __awaiter(void 0, void 0, void 0, function* () {
-        // Clear tous les todos
-        yield TodoGenerator_1.TodoGenerator.ClearAllTodos();
-        // Add 2 todos
-        yield TodoGenerator_1.TodoGenerator.CreateTodos();
+        yield testUtilities.resetParam();
+    }));
+    afterEach(() => __awaiter(void 0, void 0, void 0, function* () {
+        yield testUtilities.resetParam();
     }));
     it('Should find 2 todos', () => __awaiter(void 0, void 0, void 0, function* () {
         try {
             // Recupération des Todos
-            const todos = yield findAllToDoUseCase.execute();
+            const todos = yield UseCaseServiceImpl_1.UseCaseServiceImpl.getUseCases().findAllToDoUseCase.execute();
             expect(todos.length).toBe(2);
             expect(todos[0]).toBeInstanceOf(TodoEntity_1.TodoEntity);
         }
@@ -41,7 +40,7 @@ describe('UseCase: getAllTodos', () => {
             // Clear tous les todos
             yield TodoGenerator_1.TodoGenerator.ClearAllTodos();
             // Recupération des Todos
-            const todos = yield findAllToDoUseCase.execute();
+            const todos = yield UseCaseServiceImpl_1.UseCaseServiceImpl.getUseCases().findAllToDoUseCase.execute();
             expect(todos.length).toBe(0);
         }
         catch (error) {

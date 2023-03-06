@@ -1,23 +1,32 @@
-import { ServerSource } from "../../infra/helpers/server/ServerSource";
-import { ServerServiceImpl } from "../../infra/services/server/ServerServiceImpl";
 import request from 'supertest';
 import { UseCaseServiceImpl } from "../../domain/services/UseCaseServiceImpl";
-import { BeforeTest } from "./utilities/BeforeTest";
+import { TestUtilities } from "../utilities/TestUtilities";
 
+// Selection Server Express
+const testUtilities = new TestUtilities();
+
+// Selection des services pour les tests
+testUtilities.selectService();
 
 describe('AddTodo',()=>{
 
-  // Server Express
-  const app = ServerServiceImpl.setServer(ServerSource.express);
+  // Jest app
+  const app = testUtilities.getBackend();
 
-  
   // Path
   const path: string = '/api/v1/todo';
 
-  beforeEach(async()=>{
-    await BeforeTest.resetParameter();
+  beforeEach(async ()=>{
+    await testUtilities.resetParam();
   });
 
+  afterEach(async()=>{
+    await testUtilities.resetParam();
+    
+  })
+
+  console.log('after')
+  
 
   // Ajout d'une todo
   it('Should add a new todo', async()=>{
@@ -35,8 +44,8 @@ describe('AddTodo',()=>{
     expect(res.body).toHaveProperty('todo');
     expect(res.statusCode).toBe(201);
     expect(todos.length).toBe(3);    
-    expect(todos[2].id).toBe("3");
-    expect(todos[2].title).toBe('mon titre');
+    expect(todos[0].id.toString()).toBe("3");
+    expect(todos[0].title).toBe('mon titre');
   });
 
   // Ajout d'un todo sans description
@@ -55,8 +64,8 @@ describe('AddTodo',()=>{
     expect(res.statusCode).toBe(201);
     expect(res.body).toHaveProperty('todo');
     expect(res.body.todo.title).toBe('mon titre');
-    expect(todos[2].title).toBe('mon titre');
-    expect(todos[2].description).toBe('');
+    expect(todos[0].title).toBe('mon titre');
+    expect(todos[0].description).toBe('');
 
   })
 
@@ -95,7 +104,7 @@ describe('AddTodo',()=>{
     expect(res.body.todo).toHaveProperty('title');
     expect(res.body.todo.title).toBe('mon titre');
     expect(todos.length).toBe(3);
-    expect(todos[2].title).toBe('mon titre');
-    expect(todos[2].description).toBe('');
+    expect(todos[0].title).toBe('mon titre');
+    expect(todos[0].description).toBe('');
   })
 });

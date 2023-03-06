@@ -14,16 +14,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const supertest_1 = __importDefault(require("supertest"));
 const server_1 = require("./utilities/server");
-const SelectServices_1 = require("../domain/utilities/SelectServices");
-const ServerSource_1 = require("../../infra/helpers/server/ServerSource");
-const ServerServiceImpl_1 = require("../../infra/services/server/ServerServiceImpl");
+const TestUtilities_1 = require("../utilities/TestUtilities");
+// Selection Server Express
+const testUtilities = new TestUtilities_1.TestUtilities();
+// Selection des services pour les tests
+testUtilities.selectService();
 describe('StartServer', () => {
-    // Selection Server Express
-    const app = ServerServiceImpl_1.ServerServiceImpl.setServer(ServerSource_1.ServerSource.express);
-    // Selection logger
-    SelectServices_1.SelectServices.selectLoggerSource();
-    // Repositories
-    SelectServices_1.SelectServices.SelectRepositoriesSource();
+    // Jest app
+    const app = testUtilities.getBackend();
     // Start Server et vérification
     it('Should Start a server and get message "Bienvenue sur l\'API des Todos"', () => __awaiter(void 0, void 0, void 0, function* () {
         const server = new server_1.Server('5000');

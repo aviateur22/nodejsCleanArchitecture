@@ -12,17 +12,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ServerSource_1 = require("../../infra/helpers/server/ServerSource");
-const ServerServiceImpl_1 = require("../../infra/services/server/ServerServiceImpl");
-const BeforeTest_1 = require("./utilities/BeforeTest");
 const supertest_1 = __importDefault(require("supertest"));
+const TestUtilities_1 = require("../utilities/TestUtilities");
+// Selection Server Express
+const testUtilities = new TestUtilities_1.TestUtilities();
+// Selection des services pour les tests
+testUtilities.selectService();
 describe('FindOne Todo', () => {
-    // Server
-    const app = ServerServiceImpl_1.ServerServiceImpl.setServer(ServerSource_1.ServerSource.express);
+    // Jest app
+    const app = testUtilities.getBackend();
     // Path
     let path = '/api/v1/todo/1';
     beforeEach(() => __awaiter(void 0, void 0, void 0, function* () {
-        yield BeforeTest_1.BeforeTest.resetParameter();
+        yield testUtilities.resetParam();
+    }));
+    afterEach(() => __awaiter(void 0, void 0, void 0, function* () {
+        yield testUtilities.resetParam();
     }));
     // Recherche d'une Todo
     it('Should find the Todo', () => __awaiter(void 0, void 0, void 0, function* () {
@@ -30,7 +35,7 @@ describe('FindOne Todo', () => {
             .get(path);
         expect(res.statusCode).toBe(200);
         expect(res.body).toHaveProperty('todo');
-        expect(res.body.todo.id).toBe('1');
+        expect(res.body.todo.id.toString()).toBe('1');
         expect(res.body.todo.title).toBe('Title 1');
     }));
     // Recherhche Todo qui n'existe pas

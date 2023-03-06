@@ -1,19 +1,31 @@
-import { BeforeTest } from "./utilities/BeforeTest";
 import request from 'supertest';
 import { ServerSource } from "../../infra/helpers/server/ServerSource";
 import { ServerServiceImpl } from "../../infra/services/server/ServerServiceImpl";
 import { UseCaseServiceImpl } from "../../domain/services/UseCaseServiceImpl";
+import { TestUtilities } from '../utilities/TestUtilities';
+//import { BeforeTest } from '../utilities/BeforeTest';
+
+// Selection Server Express
+const testUtilities = new TestUtilities();
+
+// Selection des services pour les tests
+testUtilities.selectService();
 
 // Suppression d'une Todo
 describe('DeleteOne Todo', ()=>{
   // Server
-  const app = ServerServiceImpl.setServer(ServerSource.express);
+  const app = testUtilities.getBackend();
 
   // Path
   let path = '/api/v1/todo/1'
 
   beforeEach(async()=>{
-    BeforeTest.resetParameter();
+    await testUtilities.resetParam();
+  });
+
+  
+  afterEach(async()=>{
+    await testUtilities.resetParam();
   });
 
   // Succes suppression Todo
@@ -26,7 +38,7 @@ describe('DeleteOne Todo', ()=>{
     
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty('todo');
-    expect(res.body.todo.id).toBe('1');
+    expect(res.body.todo.id.toString()).toBe('1');
     expect(todos.length).toBe(1);
   });
 

@@ -13,19 +13,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const supertest_1 = __importDefault(require("supertest"));
-const ServerServiceImpl_1 = require("../../infra/services/server/ServerServiceImpl");
-const ServerSource_1 = require("../../infra/helpers/server/ServerSource");
-const TodoGenerator_1 = require("../domain/utilities/TodoGenerator");
-const BeforeTest_1 = require("./utilities/BeforeTest");
+const TodoGenerator_1 = require("../utilities/TodoGenerator");
+const TestUtilities_1 = require("../utilities/TestUtilities");
+// Selection Server Express
+const testUtilities = new TestUtilities_1.TestUtilities();
+// Selection des services pour les tests
+testUtilities.selectService();
 describe('findAlltodos', () => {
-    // Selection Server Express
-    const app = ServerServiceImpl_1.ServerServiceImpl.setServer(ServerSource_1.ServerSource.express);
+    // Jest app
+    const app = testUtilities.getBackend();
     // Path
     const path = '/api/v1/todo/find-all-todos';
-    beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
-        yield BeforeTest_1.BeforeTest.resetParameter();
+    beforeEach(() => __awaiter(void 0, void 0, void 0, function* () {
+        yield testUtilities.resetParam();
+    }));
+    afterEach(() => __awaiter(void 0, void 0, void 0, function* () {
+        yield testUtilities.resetParam();
     }));
     it('Should find all the todos avail', () => __awaiter(void 0, void 0, void 0, function* () {
+        console.log('test');
         const res = yield (0, supertest_1.default)(app)
             .get(path);
         expect(res.body).toHaveProperty('todos');
