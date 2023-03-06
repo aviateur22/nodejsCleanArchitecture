@@ -27,7 +27,6 @@ const pg_1 = require("pg");
 const dotenv = __importStar(require("dotenv"));
 dotenv.config();
 const config = {};
-console.log(process.env.NODE_ENV);
 /**la variable NODE_ENV est inclue dans HEROKU */
 if (process.env.NODE_ENV === 'production') {
     console.log(`database.js - ENV: production - DATABASE: ${process.env.DATABASE_URL}`);
@@ -37,8 +36,8 @@ if (process.env.NODE_ENV === 'production') {
     };
 }
 else {
-    console.log(`database.js - ENV: DEV - DATABASE: ${process.env.DATABASE_URL}`);
-    config.connectionString = process.env.DATABASE_URL;
+    console.log(`database.js - ENV: DEV - DATABASE: ${process.env.DATABASE_URL_DEV}`);
+    config.connectionString = process.env.DATABASE_URL_DEV;
 }
 ;
 const pool = new pg_1.Pool(config);
