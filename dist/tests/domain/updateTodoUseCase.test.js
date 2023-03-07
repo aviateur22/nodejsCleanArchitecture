@@ -12,19 +12,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const UpdateTodoEntity_1 = require("../../domain/entities/todo/UpdateTodoEntity");
 const UseCaseServiceImpl_1 = require("../../domain/services/UseCaseServiceImpl");
 const ValidationException_1 = require("../../exceptions/ValidationException");
-const SelectServices_1 = require("./utilities/SelectServices");
-const TodoGenerator_1 = require("./utilities/TodoGenerator");
+const TestUtilities_1 = require("../utilities/TestUtilities");
+// Selection Server Express
+const testUtilities = new TestUtilities_1.TestUtilities();
+// Selection des services pour les tests
+testUtilities.selectService();
 describe('Update todo UseCase', () => {
-    //Selection du repository
-    SelectServices_1.SelectServices.SelectRepositoriesSource();
-    // Instance UpdateTodo
-    const updateTodoUseCase = UseCaseServiceImpl_1.UseCaseServiceImpl.getUseCases().updateTodoUseCase;
-    // Reset des repositories
     beforeEach(() => __awaiter(void 0, void 0, void 0, function* () {
-        // Clear tous les todos
-        yield TodoGenerator_1.TodoGenerator.ClearAllTodos();
-        // Ajout de todos
-        yield TodoGenerator_1.TodoGenerator.CreateTodos();
+        yield testUtilities.resetParam();
     }));
     // Mise a jour d'une todo
     it('Should update a todo', () => __awaiter(void 0, void 0, void 0, function* () {
@@ -32,8 +27,8 @@ describe('Update todo UseCase', () => {
             // Mise a jour des données
             const updateTodo = new UpdateTodoEntity_1.UpdateTodoEntity('1', 'mon nouveau titre', 'ma nouvelle description', false);
             // Mise à jour de la todo
-            const todo = yield updateTodoUseCase.execute(updateTodo);
-            expect(todo.id).toBe(updateTodo.id);
+            const todo = yield UseCaseServiceImpl_1.UseCaseServiceImpl.getUseCases().updateTodoUseCase.execute(updateTodo);
+            expect(todo.id.toString()).toBe(updateTodo.id.toString());
             expect(todo.status).toBe(updateTodo.status);
             expect(todo.title).toBe(updateTodo.title);
             expect(todo.description).toBe(updateTodo.description);
@@ -48,7 +43,7 @@ describe('Update todo UseCase', () => {
             // Mise a jour des données
             const updateTodo = new UpdateTodoEntity_1.UpdateTodoEntity('1', '', 'ma nouvelle description', false);
             // Mise à jour de la todo
-            const todo = yield updateTodoUseCase.execute(updateTodo);
+            const todo = yield UseCaseServiceImpl_1.UseCaseServiceImpl.getUseCases().updateTodoUseCase.execute(updateTodo);
             expect(todo).toBeFalsy();
         }
         catch (error) {
@@ -61,8 +56,8 @@ describe('Update todo UseCase', () => {
             // Mise a jour des données
             const updateTodo = new UpdateTodoEntity_1.UpdateTodoEntity('1', 'mon nouveau titre', '', false);
             // Mise à jour de la todo
-            const todo = yield updateTodoUseCase.execute(updateTodo);
-            expect(todo.id).toBe(updateTodo.id);
+            const todo = yield UseCaseServiceImpl_1.UseCaseServiceImpl.getUseCases().updateTodoUseCase.execute(updateTodo);
+            expect(todo.id.toString()).toBe(updateTodo.id.toString());
             expect(todo.status).toBe(updateTodo.status);
             expect(todo.title).toBe(updateTodo.title);
             expect(todo.description).toBe(updateTodo.description);

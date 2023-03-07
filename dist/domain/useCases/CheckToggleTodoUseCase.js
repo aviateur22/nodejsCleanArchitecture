@@ -23,12 +23,10 @@ class CheckToggleTodoUseCase extends TodoUseCase_1.TodoUseCase {
      */
     execute(todo) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log(todo.status);
             // Recherche todo
             yield this.useCases.findOneTodoUseCase.execute(todo);
             // Mise a jour status
             const checkToggleTodo = yield this.repositories.checkToggleItem(todo);
-            console.log(checkToggleTodo.status);
             // renvoie la Todo mis a jour
             return TodoMapper_1.TodoEntityMapper.getTodoEntity(checkToggleTodo);
         });

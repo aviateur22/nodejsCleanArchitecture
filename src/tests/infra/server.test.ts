@@ -1,19 +1,16 @@
 import request from 'supertest';
 import { Server } from './utilities/server';
-import { SelectServices } from '../domain/utilities/SelectServices';
-import { ServerSource } from '../../infra/helpers/server/ServerSource';
-import { ServerServiceImpl } from '../../infra/services/server/ServerServiceImpl';
+import { TestUtilities } from '../utilities/TestUtilities';
+
+// Selection Server Express
+const testUtilities = new TestUtilities();
+
+// Selection des services pour les tests
+testUtilities.selectService();
 
 describe('StartServer', ()=>{
-
-  // Selection Server Express
-  const app = ServerServiceImpl.setServer(ServerSource.express);
-
-  // Selection logger
-  SelectServices.selectLoggerSource();
-
-  // Repositories
-  SelectServices.SelectRepositoriesSource();
+  // Jest app
+  const app = testUtilities.getBackend();
   
   // Start Server et vérification
   it('Should Start a server and get message "Bienvenue sur l\'API des Todos"', async()=>{

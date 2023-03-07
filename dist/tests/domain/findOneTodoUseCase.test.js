@@ -12,25 +12,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const FindTodoEntity_1 = require("../../domain/entities/todo/FindTodoEntity");
 const UseCaseServiceImpl_1 = require("../../domain/services/UseCaseServiceImpl");
 const TodoNotFindException_1 = require("../../exceptions/TodoNotFindException");
-const SelectServices_1 = require("./utilities/SelectServices");
-const TodoGenerator_1 = require("./utilities/TodoGenerator");
+const TestUtilities_1 = require("../utilities/TestUtilities");
+// Selection Server Express
+const testUtilities = new TestUtilities_1.TestUtilities();
+// Selection des services pour les tests
+testUtilities.selectService();
 describe('Find one TodoUseCase', () => {
-    //Selection du repository
-    SelectServices_1.SelectServices.SelectRepositoriesSource();
-    // Instance GetAllTodoUseCase
-    const findOneTodoUseCase = UseCaseServiceImpl_1.UseCaseServiceImpl.getUseCases().findOneTodoUseCase;
-    beforeEach(() => {
-        // Clear tous les todos
-        TodoGenerator_1.TodoGenerator.ClearAllTodos();
-        // Add 2 todos
-        TodoGenerator_1.TodoGenerator.CreateTodos();
-    });
+    beforeEach(() => __awaiter(void 0, void 0, void 0, function* () {
+        yield testUtilities.resetParam();
+    }));
     // Recherhche d'une Todo
     it('Should find the Todo', () => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const findTodoEntity = new FindTodoEntity_1.FindTodoEntity('1');
-            const findTodo = yield findOneTodoUseCase.execute(findTodoEntity);
-            expect(findTodo.id).toBe('1');
+            const findTodo = yield UseCaseServiceImpl_1.UseCaseServiceImpl.getUseCases().findOneTodoUseCase.execute(findTodoEntity);
+            expect(findTodo.id.toString()).toBe('1');
         }
         catch (error) {
             expect(error).toBeFalsy();
@@ -40,7 +36,7 @@ describe('Find one TodoUseCase', () => {
     it('Should throw TodoNotFindException because Todo not exist', () => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const findTodoEntity = new FindTodoEntity_1.FindTodoEntity('3');
-            const findTodo = yield findOneTodoUseCase.execute(findTodoEntity);
+            const findTodo = yield UseCaseServiceImpl_1.UseCaseServiceImpl.getUseCases().findOneTodoUseCase.execute(findTodoEntity);
             expect(findTodo).toBeFalsy();
         }
         catch (error) {

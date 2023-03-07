@@ -40,6 +40,9 @@ exports.default = (req, res, next) => {
             case 'number':
                 return (0, xss_1.default)(sanitizer_1.default.escape(dataToSanitize).trim());
                 break;
+            case 'boolean':
+                return dataToSanitize;
+                break;
             default:
                 return (0, xss_1.default)(sanitizer_1.default.escape(dataToSanitize));
                 break;

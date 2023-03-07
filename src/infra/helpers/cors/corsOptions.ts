@@ -14,7 +14,7 @@ export default ()=>{
     // Récupéraion de domaines
     let CORS_ORIGIN: string|undefined;
     
-    if(process.env.NODE_ENV==='DEV'){
+    if(process.env.NODE_ENV === 'DEV' || process.env.NODE_ENV === 'test'){
       console.log('en dev');
       CORS_ORIGIN = process.env.CORS_ORIGIN_DEV;       
     } else /**mode PRDODUCTION */    

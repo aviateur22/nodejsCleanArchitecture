@@ -12,19 +12,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ServerSource_1 = require("../../infra/helpers/server/ServerSource");
-const ServerServiceImpl_1 = require("../../infra/services/server/ServerServiceImpl");
 const supertest_1 = __importDefault(require("supertest"));
 const UseCaseServiceImpl_1 = require("../../domain/services/UseCaseServiceImpl");
-const BeforeTest_1 = require("./utilities/BeforeTest");
+const TestUtilities_1 = require("../utilities/TestUtilities");
+// Selection Server Express
+const testUtilities = new TestUtilities_1.TestUtilities();
+// Selection des services pour les tests
+testUtilities.selectService();
 describe('AddTodo', () => {
-    // Server Express
-    const app = ServerServiceImpl_1.ServerServiceImpl.setServer(ServerSource_1.ServerSource.express);
+    // Jest app
+    const app = testUtilities.getBackend();
     // Path
     const path = '/api/v1/todo';
     beforeEach(() => __awaiter(void 0, void 0, void 0, function* () {
-        yield BeforeTest_1.BeforeTest.resetParameter();
+        yield testUtilities.resetParam();
     }));
+    afterEach(() => __awaiter(void 0, void 0, void 0, function* () {
+        yield testUtilities.resetParam();
+    }));
+    console.log('after');
     // Ajout d'une todo
     it('Should add a new todo', () => __awaiter(void 0, void 0, void 0, function* () {
         const res = yield (0, supertest_1.default)(app)
@@ -39,8 +45,8 @@ describe('AddTodo', () => {
         expect(res.body).toHaveProperty('todo');
         expect(res.statusCode).toBe(201);
         expect(todos.length).toBe(3);
-        expect(todos[2].id).toBe("3");
-        expect(todos[2].title).toBe('mon titre');
+        expect(todos[0].id.toString()).toBe("3");
+        expect(todos[0].title).toBe('mon titre');
     }));
     // Ajout d'un todo sans description
     it('Should add a new Todo with an empty description', () => __awaiter(void 0, void 0, void 0, function* () {
@@ -56,8 +62,8 @@ describe('AddTodo', () => {
         expect(res.statusCode).toBe(201);
         expect(res.body).toHaveProperty('todo');
         expect(res.body.todo.title).toBe('mon titre');
-        expect(todos[2].title).toBe('mon titre');
-        expect(todos[2].description).toBe('');
+        expect(todos[0].title).toBe('mon titre');
+        expect(todos[0].description).toBe('');
     }));
     // Echec d'ajout car pas de titre
     it('should throw InvalidTodoTitleException because title is missing', () => __awaiter(void 0, void 0, void 0, function* () {
@@ -89,7 +95,7 @@ describe('AddTodo', () => {
         expect(res.body.todo).toHaveProperty('title');
         expect(res.body.todo.title).toBe('mon titre');
         expect(todos.length).toBe(3);
-        expect(todos[2].title).toBe('mon titre');
-        expect(todos[2].description).toBe('');
+        expect(todos[0].title).toBe('mon titre');
+        expect(todos[0].description).toBe('');
     }));
 });

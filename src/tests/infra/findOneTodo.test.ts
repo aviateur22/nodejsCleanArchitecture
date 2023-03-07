@@ -1,18 +1,26 @@
-import { ServerSource } from "../../infra/helpers/server/ServerSource";
-import { ServerServiceImpl } from "../../infra/services/server/ServerServiceImpl";
-import { BeforeTest } from "./utilities/BeforeTest";
 import request from 'supertest';
+import { TestUtilities } from "../utilities/TestUtilities";
+
+// Selection Server Express
+const testUtilities = new TestUtilities();
+
+// Selection des services pour les tests
+testUtilities.selectService();
 
 describe('FindOne Todo', ()=>{
-  // Server
-  const app = ServerServiceImpl.setServer(ServerSource.express);
-
+   // Jest app
+   const app = testUtilities.getBackend();
+   
   // Path
   let path = '/api/v1/todo/1'
 
   beforeEach(async()=>{
-    await BeforeTest.resetParameter();
+    await testUtilities.resetParam();
   });
+
+  afterEach(async()=>{
+    await testUtilities.resetParam();
+  })
 
   // Recherche d'une Todo
   it('Should find the Todo', async()=>{
@@ -22,7 +30,7 @@ describe('FindOne Todo', ()=>{
 
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty('todo');
-    expect(res.body.todo.id).toBe('1');
+    expect(res.body.todo.id.toString()).toBe('1');
     expect(res.body.todo.title).toBe('Title 1');
   });
 
