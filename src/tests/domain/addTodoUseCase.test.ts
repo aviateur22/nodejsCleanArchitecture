@@ -25,7 +25,7 @@ describe('UseCase: addItem', ()=>{
         description: 'Ma description',
         status: false
       });
-      console.log('ici')
+      
       const todos = await TodoGenerator.findAllTodos();
   
       expect(todos.length).toBe(3);
@@ -43,7 +43,7 @@ describe('UseCase: addItem', ()=>{
       const addTodoEntity = new AddTodoEntity('', 'Ma description');
 
       // Ajout de la todo
-      await await UseCaseServiceImpl.getUseCases().addTodoUseCase.execute(addTodoEntity);
+      await UseCaseServiceImpl.getUseCases().addTodoUseCase.execute(addTodoEntity);
   
       const todos = await TodoGenerator.findAllTodos();
       expect(todos.length).toBe(0);      
@@ -59,7 +59,7 @@ describe('UseCase: addItem', ()=>{
       const addTodoEntity = new AddTodoEntity('Mon titre', '');
 
       // Ajout de la todo
-      const addTodo = await await UseCaseServiceImpl.getUseCases().addTodoUseCase.execute(addTodoEntity);
+      const addTodo = await UseCaseServiceImpl.getUseCases().addTodoUseCase.execute(addTodoEntity);
   
       const todos = await TodoGenerator.findAllTodos();
 
