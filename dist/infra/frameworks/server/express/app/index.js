@@ -8,7 +8,7 @@ const cors_1 = __importDefault(require("cors"));
 const routers_1 = __importDefault(require("./routers"));
 const error_1 = __importDefault(require("./middlewares/error"));
 const notfound_1 = __importDefault(require("./middlewares/notfound"));
-const corsOptions_1 = __importDefault(require("../../../../helpers/cors/corsOptions"));
+const corsOptions_1 = __importDefault(require("./helpers/corsOptions"));
 const app = (0, express_1.default)();
 // Cors
 app.use((0, cors_1.default)((0, corsOptions_1.default)()));

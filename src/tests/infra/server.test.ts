@@ -14,7 +14,7 @@ describe('StartServer', ()=>{
   
   // Start Server et vérification
   it('Should Start a server and get message "Bienvenue sur l\'API des Todos"', async()=>{
-    const server = new Server('5000');
+    const server = new Server('3500');
     await server.startServer();
 
     const res = await request(app)
