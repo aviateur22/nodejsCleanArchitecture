@@ -1,18 +1,22 @@
 import request from 'supertest';
 import { UseCaseServiceImpl } from "../../domain/services/UseCaseServiceImpl";
+import { ServerSource } from '../../infra/helpers/server/ServerSource';
 import { TestUtilities } from '../utilities/TestUtilities';
 
 // Selection Server Express
 const testUtilities = new TestUtilities();
 
 // Selection des services pour les tests
-testUtilities.selectService();
+const serviceSelect = testUtilities.selectService();
 
 // Suppression d'une Todo
 describe('ToggleCheck Todo', ()=>{
 
  // Jest app
  const app = testUtilities.getBackend();
+
+  // Configuration App pour Jest
+  const jestApp = testUtilities.getTestApp(app, serviceSelect);
 
   // Path
   let path = '/api/v1/todo/toggle-check/1';
@@ -27,7 +31,10 @@ describe('ToggleCheck Todo', ()=>{
 
   // Succes check Todo
   it('Should check one Todo', async()=>{
-    const res = await request(app)
+    if(serviceSelect === ServerSource.fastify) {
+      await app.ready();
+    }
+    const res = await request(jestApp)
     .patch(path)
     .send({
       status: true
@@ -48,7 +55,11 @@ describe('ToggleCheck Todo', ()=>{
 
   // Success unCheck Todo
   it('Should unCheck one Todo', async()=>{
-    const res = await request(app)
+    if(serviceSelect === ServerSource.fastify) {
+      await app.ready();
+    }
+
+    const res = await request(jestApp)
     .patch(path)
     .send({
       status: false
@@ -68,9 +79,12 @@ describe('ToggleCheck Todo', ()=>{
 
   // Recherhche Todo qui n'existe pas
   it('Should throw TodoNotfindException because Todo does not exist', async()=>{
+    if(serviceSelect === ServerSource.fastify) {
+      await app.ready();
+    }
     // Path
     path = '/api/v1/todo/5'
-    const res = await request(app)
+    const res = await request(jestApp)
     .get(path)
 
     expect(res.statusCode).toBe(400);

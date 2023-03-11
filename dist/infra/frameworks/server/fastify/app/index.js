@@ -14,7 +14,7 @@ const fastify = (0, fastify_1.default)({
 // Cors
 fastify.register(cors_1.default, (0, corsOption_1.default)());
 // Router
-fastify.register(router_1.default), { prefix: '/api/v1' };
+fastify.register(router_1.default);
 // Gestion des erreurs
 fastify.setErrorHandler(erros_1.default);
 exports.default = fastify;

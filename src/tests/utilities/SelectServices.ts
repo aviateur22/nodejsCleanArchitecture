@@ -12,9 +12,16 @@ class SelectServices {
   
   /**
    * Selection server
+   * 
+   * @returns { number }
    */
-  static SelectBackend(): void {
-    ServerServiceImpl.setServer(ServerSource.express);
+  static SelectBackend(): number {
+
+    // Service selectionné
+    const serviceSelected = ServerSource.express;
+
+    ServerServiceImpl.setServer(serviceSelected);
+    return serviceSelected;
   }
   
     

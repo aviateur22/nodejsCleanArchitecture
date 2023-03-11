@@ -12,7 +12,7 @@ const fastify = Fastify({
 fastify.register(cors, corsOption());
 
 // Router
-fastify.register(router), {prefix: '/api/v1'};
+fastify.register(router);
 
 // Gestion des erreurs
 fastify.setErrorHandler(erros);

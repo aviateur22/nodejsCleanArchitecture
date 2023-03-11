@@ -22,16 +22,19 @@ export default async function todo(fastify: FastifyInstance, options: Object ) {
   fastify.patch('/:id', todoSchemaValidation.updateTodoSchema, todos.updateTodo);
 
   // Delete 1 Todo
-  fastify.delete('/:id',todoSchemaValidation.idParamSchema, todos.delteOneTodo);
+  fastify.delete('/:id',todoSchemaValidation.deleteTodoSchema, todos.delteOneTodo);
 
   // Check 1 todo
-  fastify.patch('/toggle-check/:id', todoSchemaValidation.updateTodoSchema, todos.checkToggleOneTodo);
+  fastify.patch('/toggle-check/:id', todoSchemaValidation.checkToggleTodoSchema, todos.checkToggleOneTodo);
 
   // FindAll todos
   fastify.get('/find-all-todos', todoSchemaValidation.findAllTodosSchema,  todos.findAllTodos);
 
   // Save 1 Todo
   fastify.post('/', todoSchemaValidation.addTodoSchema, todos.saveOneTodo);
+
+  // Findone Todo
+  fastify.get('/:id', todoSchemaValidation.findOneTodoSchema, todos.findOneTodo);
 
   // // Save Todo
   // fastify.post('/' , { schema: {body: todoSchemaValidation.addTodoSchema}, validatorCompiler: ({schema})=>{

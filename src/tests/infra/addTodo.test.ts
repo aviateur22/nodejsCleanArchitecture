@@ -1,17 +1,21 @@
 import request from 'supertest';
 import { UseCaseServiceImpl } from "../../domain/services/UseCaseServiceImpl";
+import { ServerSource } from '../../infra/helpers/server/ServerSource';
 import { TestUtilities } from "../utilities/TestUtilities";
 
 // Selection Server Express
 const testUtilities = new TestUtilities();
 
 // Selection des services pour les tests
-testUtilities.selectService();
+const serviceSelect: number = testUtilities.selectService();
 
 describe('AddTodo',()=>{
 
-  // Jest app
+  // App 
   const app = testUtilities.getBackend();
+
+  // Configuration App pour Jest
+  const jestApp = testUtilities.getTestApp(app, serviceSelect);
 
   // Path
   const path: string = '/api/v1/todo';
@@ -30,7 +34,11 @@ describe('AddTodo',()=>{
 
   // Ajout d'une todo
   it('Should add a new todo', async()=>{
-    const res = await request(app)
+    if(serviceSelect === ServerSource.fastify) {
+      await app.ready();
+    }
+    
+    const res = await request(jestApp)
     .post(path)
     .set('Accept', 'application/json')
     .send({
@@ -50,7 +58,11 @@ describe('AddTodo',()=>{
 
   // Ajout d'un todo sans description
   it('Should add a new Todo with an empty description', async ()=>{
-    const res = await request(app)
+    if(serviceSelect === ServerSource.fastify) {
+      await app.ready();
+    }
+    
+    const res = await request(jestApp)    
     .post(path)
     .set('Accept', 'application/json')
     .send({
@@ -71,7 +83,11 @@ describe('AddTodo',()=>{
 
   // Echec d'ajout car pas de titre
   it('should throw InvalidTodoTitleException because title is missing', async()=>{
-    const res = await request(app)
+    if(serviceSelect === ServerSource.fastify) {
+      await app.ready();
+    }
+    
+    const res = await request(jestApp)
     .post(path)
     .set('Accept', 'application/json')
     .send({
@@ -89,7 +105,11 @@ describe('AddTodo',()=>{
 
   // Ajout todo sans description
   it('Should add a todo with an empty description', async()=>{
-    const res = await request(app)
+    if(serviceSelect === ServerSource.fastify) {
+      await app.ready();
+    }
+    
+    const res = await request(jestApp)
     .post(path)
     .set('Accept', 'application/json')
     .send({

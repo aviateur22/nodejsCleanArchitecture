@@ -1,12 +1,9 @@
-import todoItem from "./todoItem";
+import todosSerialize from "./serialization/todosSerialize";
 
 export default  {
   schema :{
     response: {
-      200: {
-        type: 'array',
-        items: todoItem
-      }
+      200: todosSerialize
     }
   }
 }

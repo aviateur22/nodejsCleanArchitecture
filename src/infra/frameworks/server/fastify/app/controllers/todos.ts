@@ -3,29 +3,40 @@ import { ValidationException } from "../../../../../../exceptions/ValidationExce
 import { TodoDataAccess } from "../../../../../helpers/dataAccess/TodoDataAccess";
 
 export default  {
+  /**
+   * Recerhche des Todos
+   * @param {FastifyRequest} request 
+   * @param {FastifyReply} reply 
+   */
   findAllTodos : async(request: FastifyRequest, reply: FastifyReply)=>{
     //throw new ValidationException('test');
-    reply.code(400).send(new ValidationException('Erreur de concenption'))
+    //reply.code(400).send(new ValidationException('Erreur de concenption'))
     const todos = await TodoDataAccess.findAllTodos();
-    reply.code(200).send(todos)
+    reply.code(200).send({todos})
   },
 
+  /**
+   * Sauvegarde d'une Todo
+   * @param {FastifyRequest} request 
+   * @param {FastifyReply} reply 
+   */
   saveOneTodo: async(request: FastifyRequest<{Body: AddTodoSchema}>, reply: FastifyReply)=>{    
     const { title, description } = request.body;
 
      // Ajout de la Todo
      const todo = await TodoDataAccess.addTodo(title, description);    
 
-    console.log(title, description);
-
-    reply.code(201).send(todo);
+    reply
+    .code(201).
+    send({todo});
   },
 
+  
   /**
- * Update d'une Todo
- * @param { FastifyRequest } request 
- * @param { FastifyReply } reply 
- */
+   * Update d'une Todo
+   * @param { FastifyRequest } request 
+   * @param { FastifyReply } reply 
+   */
   updateTodo: async(request: FastifyRequest<{Params: {id: string}, Body: UpdateTodoSchema}>, reply: FastifyReply)=>{
     // Id de la Todo
     const id = request.params.id;
@@ -33,14 +44,10 @@ export default  {
     // Contenu de la Todo
     const { title, description, status } = request.body;
 
-    console.log(request.body)
-
     // Mise a jour de la Todo
     const todo = await TodoDataAccess.updateTodo(id, title, description, status);
 
-    reply.status(200).send({
-      todo
-    })
+    reply.status(200).send({todo})
   },
 
   /**
@@ -54,9 +61,7 @@ export default  {
 
     const todo = await TodoDataAccess.findOneTodo(id);
 
-    reply.send({
-      todo
-    })
+    reply.send({ todo })
   },
   
   /**
@@ -71,29 +76,24 @@ export default  {
     // Suppression
     const todo = await TodoDataAccess.deleteOneTodo(id);
     
-    reply.send({
-      todo
-    })
+    reply.send({todo})
   },
 
-    /**
-     * CheckToggle d'une Todo
-     * @param { Request } req 
-     * @param { Response } res 
-     * @param { NextFunction } next 
-     */
-    checkToggleOneTodo: async(request: FastifyRequest<{Params: {id: string}, Body: CheckToggleTodoSchema}>, reply: FastifyReply)=>{
-      // id Todo
-      const id: string = request.params.id;
-  
-      // Status
-      const { status } = request.body;
-  
-      // CheckToggle
-      const todo = await TodoDataAccess.checkToggleOneTodo(id, status);
-  
-      reply.send({
-        todo
-      })
-    }
+  /**
+   * CheckToggle d'une Todo
+   * @param { FastifyRequest } request 
+   * @param { FastifyReply } reply 
+   */
+  checkToggleOneTodo: async(request: FastifyRequest<{Params: {id: string}, Body: CheckToggleTodoSchema}>, reply: FastifyReply)=>{
+    // id Todo
+    const id: string = request.params.id;
+
+    // Status
+    const { status } = request.body;
+
+    // CheckToggle
+    const todo = await TodoDataAccess.checkToggleOneTodo(id, status);
+
+    reply.send({todo})
+  }
 }

@@ -10,18 +10,8 @@ export default  {
       required: ['id'],
       additionalProperties: false
     },
-    body: {
-      type: 'object',
-      properties: {        
-        title: { type: 'string', minLength: 2 },
-        description: { type: 'string', minLength: 0 },
-        status: { type: 'boolean'}
-      },
-      required: ['title', 'status'],
-      additionalProperties: false
-    },
     response: {
       200: todoSerialize
-    }    
+    }
   }
 }
