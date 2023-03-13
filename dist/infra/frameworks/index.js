@@ -52,7 +52,7 @@ const app = ServerServiceImpl_1.ServerServiceImpl.setServer(serverSource);
 //Initilaisation du logger
 LoggerServiceImpl_1.LoggerServiceImpl.setLogger(LoggerSource_1.LoggerSource.bunyan);
 // Initilisation repositories
-RepositoryServiceImpl_1.RepositoryServiceImpl.setRepositories(RepositorySources_1.RepositorySources.inMemory);
+RepositoryServiceImpl_1.RepositoryServiceImpl.setRepositories(RepositorySources_1.RepositorySources.postgreSQL);
 // Port
 const PORT = (_a = process.env.PORT) !== null && _a !== void 0 ? _a : 3000;
 /**

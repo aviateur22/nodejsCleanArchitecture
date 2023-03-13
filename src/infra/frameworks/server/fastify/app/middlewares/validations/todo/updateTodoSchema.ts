@@ -13,7 +13,7 @@ export default  {
     body: {
       type: 'object',
       properties: {        
-        title: { type: 'string', minLength: 2 },
+        title: { type: 'string', minLength: 1 },
         description: { type: 'string', minLength: 0 },
         status: { type: 'boolean'}
       },
