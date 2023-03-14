@@ -11,7 +11,7 @@ import { ServerException } from "../../exceptions/ServerException";
 
 
 // Selection du server
-const serverSource: number = ServerSource.fastify;
+const serverSource: number = ServerSource.express;
 const app = ServerServiceImpl.setServer(serverSource);
 
 //Initilaisation du logger

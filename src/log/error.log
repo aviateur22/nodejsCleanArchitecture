@@ -245,3 +245,5 @@
 {"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":18228,"level":50,"msg":"todo not find","time":"2023-03-11T22:30:39.063Z","v":0}
 {"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":18228,"level":50,"msg":"todo not find","time":"2023-03-11T22:30:39.961Z","v":0}
 {"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":18228,"level":50,"msg":"todo not find","time":"2023-03-11T22:30:40.745Z","v":0}
+{"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":7628,"level":50,"msg":"title is mandatory","time":"2023-03-14T17:42:23.658Z","v":0}
+{"name":"todoApp","hostname":"UTILISA-LJOD9AV","pid":7628,"level":50,"msg":"title is mandatory","time":"2023-03-14T17:42:39.572Z","v":0}

@@ -47,7 +47,7 @@ const ServerServiceImpl_1 = require("../services/server/ServerServiceImpl");
 const ServerSource_1 = require("../helpers/server/ServerSource");
 const ServerException_1 = require("../../exceptions/ServerException");
 // Selection du server
-const serverSource = ServerSource_1.ServerSource.fastify;
+const serverSource = ServerSource_1.ServerSource.express;
 const app = ServerServiceImpl_1.ServerServiceImpl.setServer(serverSource);
 //Initilaisation du logger
 LoggerServiceImpl_1.LoggerServiceImpl.setLogger(LoggerSource_1.LoggerSource.bunyan);
