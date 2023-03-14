@@ -1,7 +1,9 @@
 import { fastify, FastifyInstance, FastifyRequest, FastifyReply } from "fastify";
+
 import todos from "../../controllers/todos";
 import todoSchemaValidation from '../../middlewares/validations/todo';
 import  Ajv from 'ajv'
+import Joi from "joi";
 
 //import addTodoSchema from "../../../../express/app/middlewares/validations/schemas/addTodoSchema";
 
@@ -31,14 +33,15 @@ export default async function todo(fastify: FastifyInstance, options: Object ) {
   fastify.get('/find-all-todos', todoSchemaValidation.findAllTodosSchema,  todos.findAllTodos);
 
   // Save 1 Todo
-  fastify.post('/', todoSchemaValidation.addTodoSchema, todos.saveOneTodo);
+  // fastify.post('/', todoSchemaValidation.addTodoSchema, todos.saveOneTodo);
 
   // Findone Todo
   fastify.get('/:id', todoSchemaValidation.findOneTodoSchema, todos.findOneTodo);
-
-  // // Save Todo
-  // fastify.post('/' , { schema: {body: todoSchemaValidation.addTodoSchema}, validatorCompiler: ({schema})=>{
-  //    const validate = ajv.compile(schema)
-  //     return validate
-  // }} ,todos.saveOneTodo);
+  const schemaProperty = todoSchemaValidation.test;
+  
+  // Save Todo ajvError
+  fastify.post('/' , {  schema: todoSchemaValidation.test, validatorCompiler: ({schema})=>{
+     const validate = ajv.compile(schema)
+      return validate
+  }} ,todos.saveOneTodo);
 }

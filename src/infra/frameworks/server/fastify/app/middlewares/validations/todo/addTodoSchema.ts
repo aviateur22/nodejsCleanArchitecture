@@ -9,6 +9,14 @@ export default  {
         description: { type: 'string', minLength: 0 }
       },
       required: ['title'],
+      errorMessage: {
+        properties: {
+          'title': 'Please provide a valid username'
+        },
+        required: {
+          'title': 'Please provide a username'
+        }
+      },
       additionalProperties: false
     },
     response: {
