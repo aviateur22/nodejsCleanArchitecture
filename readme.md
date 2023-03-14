@@ -1,15 +1,16 @@
-# TodoBackend - Ma super Todo
+# Base clean architecture project 
 
 ## Project description
-Simple todo backend with first implementation of clean architecture
+start project with clean architecture 
 
-## Dev information
-Node 16.17
+## Base package include following:
+Typescript
 Express
-Typescript 
+Fastify
+Typescript
+InMemory repo
+PostgreSql repo
+Jest
 
-## Project release on Heroku
-uri: https://my-todos-app.herokuapp.com/
-
-## Database
-Only inMemory - Expect to implement soon postgreSql database
+## Start dev server
+> npm run dev
