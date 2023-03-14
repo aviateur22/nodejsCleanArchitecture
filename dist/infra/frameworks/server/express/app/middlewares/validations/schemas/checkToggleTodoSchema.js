@@ -9,5 +9,5 @@ exports.default = joi_1.default.object({
     id: joi_1.default
         .any(),
     status: joi_1.default
-        .any()
+        .boolean()
 });

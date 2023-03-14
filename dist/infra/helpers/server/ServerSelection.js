@@ -24,10 +24,10 @@ class ServerSelection {
                 return this.loadExpress();
                 break;
             // Fastfiy
-            case ServerSource_1.ServerSource.fastify: break;
-            default:
-                throw new ServerException_1.ServerException('Server not configure');
+            case ServerSource_1.ServerSource.fastify:
+                return this.loadFastify();
                 break;
+            default: throw new ServerException_1.ServerException('Server not configure');
         }
     }
     /**
