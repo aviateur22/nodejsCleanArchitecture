@@ -1,6 +1,4 @@
-import { TodoRepositorySchema } from "../../domain/ports/repositoriesSchemas/TodoRepositorySchema";
 import { LoggerSource } from "../../infra/helpers/logger/LoggerSource";
-import { Repositories } from "../../infra/helpers/repositories/Repositories";
 import { RepositorySources } from "../../infra/helpers/repositories/RepositorySources";
 import { ServerSource } from "../../infra/helpers/server/ServerSource";
 import { LoggerServiceImpl } from "../../infra/services/logger/LoggerServiceImpl";
@@ -14,9 +12,16 @@ class SelectServices {
   
   /**
    * Selection server
+   * 
+   * @returns { number }
    */
-  static SelectBackend(): void {
-    ServerServiceImpl.setServer(ServerSource.express);
+  static SelectBackend(): number {
+
+    // Service selectionné
+    const serviceSelected = ServerSource.express;
+
+    ServerServiceImpl.setServer(serviceSelected);
+    return serviceSelected;
   }
   
     
@@ -24,7 +29,7 @@ class SelectServices {
    * Selection repo
    */
   static SelectRepositoriesSource(): void {
-    RepositoryServiceImpl.setRepositories(RepositorySources.inMemory);  
+    RepositoryServiceImpl.setRepositories(RepositorySources.postgreSQL);  
   }
 
   /**

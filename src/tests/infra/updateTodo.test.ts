@@ -1,18 +1,21 @@
 import request from "supertest";
 import { UseCaseServiceImpl } from "../../domain/services/UseCaseServiceImpl";
+import { ServerSource } from "../../infra/helpers/server/ServerSource";
 import { TestUtilities } from "../utilities/TestUtilities";
 
 // Selection Server Express
 const testUtilities = new TestUtilities();
 
 // Selection des services pour les tests
-testUtilities.selectService();
+const serviceSelect = testUtilities.selectService();
 
 describe('UpdateTodo', ()=>{
 
   // Server
   const app = testUtilities.getBackend();
 
+  // Configuration App pour Jest
+  const jestApp = testUtilities.getTestApp(app, serviceSelect);
   let path = '/api/v1/todo/2'
 
   beforeEach(async()=>{
@@ -25,7 +28,10 @@ describe('UpdateTodo', ()=>{
  
   // Update Todo
   it('should update a Todo', async()=>{
-    const res = await request(app)
+    if(serviceSelect === ServerSource.fastify) {
+      await app.ready();
+    }
+    const res = await request(jestApp)
     .patch(path)    
     .send({     
       title: 'mon titre mis a jour',
@@ -49,7 +55,10 @@ describe('UpdateTodo', ()=>{
 
   // Mise a jour todo avec description vide
   it('Should update a Todo with an empty description', async()=>{
-    const res = await request(app)
+    if(serviceSelect === ServerSource.fastify) {
+      await app.ready();
+    }
+    const res = await request(jestApp)
     .patch(path)    
     .send({
       title: 'mon titre mis a jour',
@@ -74,8 +83,11 @@ describe('UpdateTodo', ()=>{
 
   // Todo absente d ela base de données
   it('Should throw TodoNotfindException because Todo does not exist', async()=>{
+    if(serviceSelect === ServerSource.fastify) {
+      await app.ready();
+    }
     path = '/api/v1/todo/5'
-    const res = await request(app)
+    const res = await request(jestApp)
     .patch(path)    
     .send({
       title: 'mon titre mis a jour',
@@ -89,7 +101,10 @@ describe('UpdateTodo', ()=>{
 
   // Todo - titre manuqant
   it('Should throw ValidationException because Title is missing', async()=>{
-    const res = await request(app)
+    if(serviceSelect === ServerSource.fastify) {
+      await app.ready();
+    }
+    const res = await request(jestApp)
     .patch(path)    
     .send({
       title: '',
@@ -104,7 +119,7 @@ describe('UpdateTodo', ()=>{
 
   // Todo - status manquant
   it('Should throw ValidationException because status is missing', async()=>{
-    const res = await request(app)
+    const res = await request(jestApp)
     .patch(path)    
     .send({     
       title: 'mon noveau titre',

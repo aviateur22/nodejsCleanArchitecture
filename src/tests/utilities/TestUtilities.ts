@@ -1,9 +1,11 @@
 import { TodoEntity } from "../../domain/entities/todo/TodoEntity";
 import { TodoRepositorySchema } from "../../domain/ports/repositoriesSchemas/TodoRepositorySchema";
 import { UseCaseServiceImpl } from "../../domain/services/UseCaseServiceImpl";
+import { ServerSource } from "../../infra/helpers/server/ServerSource";
 import { RepositoryServiceImpl } from "../../infra/services/repository/RepositoryServiceImpl";
 import { ServerServiceImpl } from "../../infra/services/server/ServerServiceImpl";
 import { SelectServices } from "./SelectServices";
+
 
 export class TestUtilities {
   
@@ -25,18 +27,20 @@ export class TestUtilities {
   
   /**
    * Initilise les services pour les tests
+   * 
+   * @returns {number} - Service selectionné
    */
-  selectService(): void {
+  selectService(): number {
     // Selection Backend
-    SelectServices.SelectBackend();
-    console.log('fin reset');
-    
+    const selectedService: number = SelectServices.SelectBackend();
+
     // Selection logger
     SelectServices.selectLoggerSource();
 
     // Repositories
     SelectServices.SelectRepositoriesSource();
-   
+
+    return selectedService;
   }
 
   /**
@@ -55,7 +59,7 @@ export class TestUtilities {
    * @returns {any}
    */
   getBackend(): any {
-    return ServerServiceImpl.getServer()
+    return ServerServiceImpl.getServer();
   }
 
   /**
@@ -64,6 +68,20 @@ export class TestUtilities {
    */
   private getRepository(): TodoRepositorySchema {  
     return RepositoryServiceImpl.getRepository().todoRepository;
+  }
+
+  /**
+   * App pour les tests 
+   * @param app 
+   * @param selectedServer 
+   * @returns  
+   */
+  getTestApp(app: any, selectedServer: number): any {
+    switch(selectedServer) {
+      case ServerSource.express: return app; break;
+      case ServerSource.fastify: return app.server; break;
+      default: return app; break;
+    }
   }
 
   /**

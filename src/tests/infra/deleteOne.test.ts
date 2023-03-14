@@ -1,7 +1,6 @@
 import request from 'supertest';
-import { ServerSource } from "../../infra/helpers/server/ServerSource";
-import { ServerServiceImpl } from "../../infra/services/server/ServerServiceImpl";
 import { UseCaseServiceImpl } from "../../domain/services/UseCaseServiceImpl";
+import { ServerSource } from '../../infra/helpers/server/ServerSource';
 import { TestUtilities } from '../utilities/TestUtilities';
 //import { BeforeTest } from '../utilities/BeforeTest';
 
@@ -9,12 +8,15 @@ import { TestUtilities } from '../utilities/TestUtilities';
 const testUtilities = new TestUtilities();
 
 // Selection des services pour les tests
-testUtilities.selectService();
+const serviceSelect = testUtilities.selectService();
 
 // Suppression d'une Todo
 describe('DeleteOne Todo', ()=>{
   // Server
   const app = testUtilities.getBackend();
+
+   // Configuration App pour Jest
+   const jestApp = testUtilities.getTestApp(app, serviceSelect);   
 
   // Path
   let path = '/api/v1/todo/1'
@@ -29,8 +31,13 @@ describe('DeleteOne Todo', ()=>{
   });
 
   // Succes suppression Todo
-  it('Should delete one Todo', async()=>{
-    const res = await request(app)
+  it('Should delete one Todo', async()=>{    
+    
+    if(serviceSelect === ServerSource.fastify) {
+      await app.ready();
+    }
+
+    const res = await request(jestApp)
     .delete(path)
 
     // Récupération des Todos
@@ -45,9 +52,14 @@ describe('DeleteOne Todo', ()=>{
   // Echec Suppression Todo
   it('Should Throw TodoNotFindException because Todo doas not exist', async()=>{
 
-    path = '/api/v1/todo/10'
+    path = '/api/v1/todo/10';
 
-    const res = await request(app)
+    
+    if(serviceSelect === ServerSource.fastify) {
+      await app.ready();
+    }
+    
+    const res = await request(jestApp)
     .delete(path);
 
     // Récupération des Todos
