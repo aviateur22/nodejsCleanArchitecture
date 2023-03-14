@@ -6,6 +6,7 @@ import deleteTodoSchema from "./deleteTodoSchema";
 import findOneTodoSchema from "./findOneTodoSchema";
 import test from "./test";
 
+
 // Export des schéma de vérification des todos
 export default {
   addTodoSchema,
@@ -14,5 +15,5 @@ export default {
   checkToggleTodoSchema,
   deleteTodoSchema,
   findOneTodoSchema,
-  test
+  test,
 }
